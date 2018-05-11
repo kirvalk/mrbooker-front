@@ -9,7 +9,7 @@ class Button extends React.Component {
 
   render() {
     return (
-      <button>{this.state.title}</button>
+      <button className="button">{this.state.title}</button>
     );
   }
 }
