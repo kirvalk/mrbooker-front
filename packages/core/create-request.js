@@ -1,7 +1,5 @@
 const apiConfig = require('./api-config');
 
-const API_HOST = 'http://localhost:3000';
-
 const compileUrl = (url, params) => {
   const resultArr = [];
   const options = Object.assign({}, params);
@@ -53,7 +51,7 @@ module.exports = (requestName, queryOptions, body) => {
   }
 
   return new Promise((resolve) => {
-    const requestUrl = API_HOST + compileUrl(options.path, queryOptions);
+    const requestUrl = compileUrl(options.path, queryOptions);
 
     fetch(requestUrl, {
       headers: new Headers({
@@ -61,7 +59,6 @@ module.exports = (requestName, queryOptions, body) => {
         'Content-Type': 'application/json',
       }),
       method: options.method || 'GET',
-      mode: 'cors',
       body: body ? JSON.stringify(body) : undefined,
     })
       .then((response) => response.json())
