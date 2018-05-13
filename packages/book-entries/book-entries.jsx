@@ -48,7 +48,8 @@ class BookEntries extends React.Component {
       <div className='book-entries'>
         {
           this.state.rooms.length > 0
-          && this.state.rooms.map((room) => <Room deleteRoom={this.deleteRoom} info = {room} key={room.id} />)
+          && this.state.rooms
+            .map((room) => <Room deleteRoom={this.deleteRoom} info = {room} key={room.id} />)
         }
         <AddForm addRoom={this.addRoom} />
 

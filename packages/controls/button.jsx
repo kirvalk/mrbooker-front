@@ -7,7 +7,7 @@ class Button extends React.Component {
     this.state = { title: 'Добавить' };
   }
 
-  clickHandler(e) {
+  clickHandler() {
     const name = document.querySelector('#name');
     const capacity = document.querySelector('#capacity');
     const projector = document.querySelector('#projector');
@@ -33,6 +33,9 @@ class Button extends React.Component {
   }
 }
 
-Button.propTypes = { title: PropTypes.string };
+Button.propTypes = {
+  title: PropTypes.string,
+  addRoom: PropTypes.func,
+};
 
 module.exports = Button;

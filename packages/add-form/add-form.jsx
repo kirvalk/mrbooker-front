@@ -2,6 +2,8 @@ const React = require('react');
 const TextInput = require('controls/text-input.jsx');
 const Checkbox = require('controls/checkbox.jsx');
 const Button = require('controls/button.jsx');
+const PropTypes = require('prop-types');
+
 
 class AddForm extends React.Component {
   render() {
@@ -21,5 +23,5 @@ class AddForm extends React.Component {
     );
   }
 }
-
+AddForm.propTypes = { addRoom: PropTypes.func };
 module.exports = AddForm;

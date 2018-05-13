@@ -1,5 +1,6 @@
 const React = require('react');
 const Entry = require('entry/entry.jsx');
+const PropTypes = require('prop-types');
 
 class Room extends React.Component {
   constructor(props) {
@@ -37,5 +38,8 @@ class Room extends React.Component {
   }
 }
 
-
+Room.propTypes = {
+  deleteRoom: PropTypes.func,
+  info: PropTypes.object,
+};
 module.exports = Room;
