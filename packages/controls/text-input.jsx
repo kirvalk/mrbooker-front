@@ -3,8 +3,9 @@ const PropTypes = require('prop-types');
 
 class TextInput extends React.Component {
   render() {
+    const { id } = this.props;
     return (
-      <input type="text" placeholder={this.props.placeholder} className="text-input"/>
+      <input id={id} type="text" placeholder={this.props.placeholder} className="text-input"/>
     );
   }
 }

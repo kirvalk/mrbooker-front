@@ -9,8 +9,8 @@ module.exports = {
     method: 'GET',
   },
 
-  addTask: {
-    path: '/api/v001/tasks',
+  addRoom: {
+    path: '/api/v001/rooms',
     method: 'POST',
   },
 
@@ -19,8 +19,8 @@ module.exports = {
     method: 'PATCH',
   },
 
-  deleteTask: {
-    path: '/api/v001/tasks/:id',
+  deleteRoom: {
+    path: '/api/v001/rooms/:id',
     method: 'DELETE',
   },
 };

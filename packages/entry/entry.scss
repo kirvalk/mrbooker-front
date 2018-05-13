@@ -1,0 +1,23 @@
+.entry {
+  width: 150px;
+  height: 90px;
+
+  border: 1px solid #F81B07;
+  &__elem {
+    height: 30px;
+
+    text-align: center;
+
+    line-height: 30px;
+  }
+  &__remove {
+    display: inline-block;
+
+    width: 74px;
+  }
+  &__change {
+    display: inline-block;
+
+    width: 74px;
+  }
+}

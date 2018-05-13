@@ -10,13 +10,13 @@ class AddForm extends React.Component {
     return (
       <div className="add-form">
         <div className="add-form__tite">Добавить переговорную в БД</div>
-        <TextInput placeholder={placeholders.name} />
-        <TextInput placeholder={placeholders.capacity} />
+        <TextInput id="name" placeholder={placeholders.name} />
+        <TextInput id="capacity" placeholder={placeholders.capacity} />
         <div className="add-form__equioment">Имеющееся оборудование:</div>
-        <Checkbox label={labels.projector}/>
-        <Checkbox label={labels.sound}/>
-        <Checkbox label={labels.telephone}/>
-        <Button />
+        <Checkbox id="projector" label={labels.projector}/>
+        <Checkbox id="sound" label={labels.sound}/>
+        <Checkbox id="telephone" label={labels.telephone}/>
+        <Button addRoom={this.props.addRoom} />
       </div>
     );
   }
