@@ -25,11 +25,11 @@ class Room extends React.Component {
         <div className="room__controls" onClick={this.delRoom.bind(this)}></div>
         <div className='room__param'>{this.state.name}</div>
         <div className='room__param'>{this.state.capacity}</div>
-        {this.getEquipmentList()
-          .map((eq) => <div className='room__param' key={eq.index}>{eq}</div>)}
-
         {
-
+          this.getEquipmentList()
+            .map((eq) => <div className='room__param' key={eq.index}>{eq}</div>)
+        }
+        {
           this.state.reserved
             .map((el) => <Entry key={el.index} user={el.user} date={el.date} />)
         }
