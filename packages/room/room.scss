@@ -1,22 +1,11 @@
 .room {
-  display: flex;
-  align-content: center;
-  align-items: center;
+  &__title {
+    position: relative;
 
-  height: 100px;
+    width: 12.5%;
 
-  border: 1px solid black;
-  background-color: #ABA7A7;
-  &__param {
-    // width: 30px;
-    padding: 0 10px;
-
+    border: 1px solid #ddd;
   }
-  &__controls {
-    width: 20px;
-    height: 20px;
 
-    background-color: red;
-  }
 
 }

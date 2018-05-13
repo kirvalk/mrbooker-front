@@ -1,6 +1,13 @@
 .book-entries {
-  width: 800px;
-  margin: 0 auto;
+  float: right;
 
-  background-color: #F7F0A8;
+  width: 800px;
+  margin: 0 auto; border-collapse: collapse;
+
+  &__header {
+    border: 1px solid #ddd;
+
+    font-size: 13px;
+    font-weight: 300;
+  }
 }

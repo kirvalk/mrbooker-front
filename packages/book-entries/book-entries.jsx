@@ -7,7 +7,7 @@ const { responseStatuses } = require('core/constants');
 class BookEntries extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { rooms: [] };
+    this.state = { rooms: [], days: [1, 2, 3, 4, 5, 6, 7] };
     this.addRoom = this.addRoom.bind(this);
     this.deleteRoom = this.deleteRoom.bind(this);
   }
@@ -45,15 +45,40 @@ class BookEntries extends React.Component {
 
   render() {
     return (
-      <div className='book-entries'>
-        {
-          this.state.rooms.length > 0
-          && this.state.rooms
-            .map((room) => <Room deleteRoom={this.deleteRoom} info = {room} key={room.id} />)
-        }
+      <div>
         <AddForm addRoom={this.addRoom} />
-
+        <table className='book-entries'>
+          <thead>
+            <tr>
+              <th className='book-entries__header'>КОМНАТА</th>
+              <th className='book-entries__header'>ПОНЕДЕЛЬНИК</th>
+              <th className='book-entries__header'>ВТОРНИК</th>
+              <th className='book-entries__header'>СРЕДА</th>
+              <th className='book-entries__header'>ЧЕТВЕРГ</th>
+              <th className='book-entries__header'>ПЯТНИЦА</th>
+              <th className='book-entries__header'>СУББОТА</th>
+              <th className='book-entries__header'>ВОСКРЕСЕНЬЕ</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            this.state.rooms.length > 0
+            && this.state.rooms
+              .map((room) => <Room deleteRoom={this.deleteRoom} days={this.state.days} info = {room} key={room.id} />)
+          }
+          </tbody>
+        </table>
       </div>
+
+      // <div className='book-entries'>
+      //   {
+      //     this.state.rooms.length > 0
+      //     && this.state.rooms
+      //       .map((room) => <Room deleteRoom={this.deleteRoom} info = {room} key={room.id} />)
+      //   }
+      //
+
+      // </div>
 
     );
   }

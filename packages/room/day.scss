@@ -1,0 +1,12 @@
+.day {
+  width: 12.5%;
+  padding: 6px 1px 6px 1px;
+
+  border: 1px solid #ddd;
+  &__main {
+    min-height: 100px;
+  }
+  &__name {
+    text-align: right;
+  }
+}

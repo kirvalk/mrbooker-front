@@ -3,6 +3,9 @@
 @import 'packages/room/room.scss';
 @import 'packages/add-form/add-form.scss';
 @import 'packages/entry/entry.scss';
+@import 'packages/room/day.scss';
+@import 'packages/icons/delete.scss';
+@import 'packages/icons/pencil.scss';
 
 
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
@@ -12,7 +15,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background: #ebebeb /*url("../../images/cat.jpg")*/;
+  background: #ebebeb;
 
   font-family: 'Fira Sans', sans-serif;
   font-size: 16px;
@@ -24,6 +27,21 @@ ul, li {
   padding: 0;
 }
 
-* {
-  box-sizing: border-box;
+.main {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 15px;
+
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+  &:after {
+    display: block;
+    clear: both;
+
+    content:'';
+  }
 }
+
+// * {
+//   box-sizing: border-box;
+// }
