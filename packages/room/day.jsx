@@ -6,7 +6,7 @@ class Room extends React.Component {
     return (
       <td className='day'>
         <div className='day__main'>
-          <div className='day__name'>{this.props.day}</div>
+          <div className='day__name'></div>
           <div className='day__user'>{this.props.entry.user}</div>
         </div>
 

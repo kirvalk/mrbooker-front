@@ -7,18 +7,30 @@ class RoomName extends React.Component {
     this.state = Object.assign({}, this.props, { change: false });
   }
 
-  updateRoom() {
-    const inp = document.querySelector(`#${this.props.id}`);
+  startEdit() {
+    this.setState({ change: true });
+  }
+
+  endEdit() {
+    this.setState({ change: false });
   }
 
 
   render() {
     return (
       <div>
-        <div className='room__name' onClick={this.updateRoom.bind(this)}>
-          {this.props.name}
-        </div>
-          {/* <input type="text" id={this.props.id} className='room__input'/> */}
+        {
+           !this.state.change
+           && <div className='room__name' onClick={this.startEdit.bind(this)}>
+           {this.props.name}
+         </div>
+        }
+
+        {
+          this.state.change
+          && <input type="text" onBlur={this.endEdit.bind(this)} className='room__input'/>
+        }
+
       </div>
     );
   }

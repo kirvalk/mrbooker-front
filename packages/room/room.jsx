@@ -26,7 +26,6 @@ class Room extends React.Component {
   }
 
   render() {
-    this.getEntries(1525885200000);
     const { id } = this.props.info;
     return (
       <tr className='room'>

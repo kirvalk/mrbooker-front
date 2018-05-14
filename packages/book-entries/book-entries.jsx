@@ -1,25 +1,24 @@
 const React = require('react');
 const AddForm = require('add-form/add-form.jsx');
 const Room = require('room/room.jsx');
+const Direction = require('controls/direction-button.jsx');
 const createRequest = require('core/create-request');
 const { responseStatuses } = require('core/constants');
 
 class BookEntries extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { rooms: [], days: [1, 1525885200000, 3, 4, 5, 6, 7] };
+    this.state = { rooms: [], days: [1525626000000, 1525712400000, 1525798800000, 1525885200000, 1525971600000, 1526058000000, 1526144400000] };
     this.addRoom = this.addRoom.bind(this);
     this.deleteRoom = this.deleteRoom.bind(this);
     this.updateRoom = this.updateRoom.bind(this);
+    this.moveWeek = this.moveWeek.bind(this);
   }
 
   componentDidMount() {
     createRequest('fetchRooms').then((response) => {
       this.setState({ rooms: response.data || [] });
     });
-    // createRequest('fetchRoom', { id: 'bf2bc8cd71bc4' }).then((response) => {
-    //   // this.setState({ tasks: response.data || [] });
-    // });
   }
 
   addRoom(obj) {
@@ -63,21 +62,62 @@ class BookEntries extends React.Component {
     });
   }
 
+  parseDate(ms) {
+    const date = new Date(ms);
+    const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+      'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+  }
+
+  moveWeek(direction) {
+    const weekMs = 86400000 * 7;
+    if (direction === 'prev') {
+      const days = this.state.days.map((day) => day - weekMs);
+      this.setState({ days });
+    } else if (direction === 'next') {
+      const days = this.state.days.map((day) => day + weekMs);
+      this.setState({ days });
+    }
+  }
+
   render() {
     return (
       <div>
         <AddForm addRoom={this.addRoom} />
+        <Direction moveWeek={this.moveWeek} dir={'prev'} />
+        <Direction moveWeek={this.moveWeek} dir={'next'} />
         <table className='book-entries'>
           <thead>
             <tr>
               <th className='book-entries__header'>КОМНАТА</th>
-              <th className='book-entries__header'>ПОНЕДЕЛЬНИК</th>
-              <th className='book-entries__header'>ВТОРНИК</th>
-              <th className='book-entries__header'>СРЕДА</th>
-              <th className='book-entries__header'>ЧЕТВЕРГ</th>
-              <th className='book-entries__header'>ПЯТНИЦА</th>
-              <th className='book-entries__header'>СУББОТА</th>
-              <th className='book-entries__header'>ВОСКРЕСЕНЬЕ</th>
+              <th className='book-entries__header'>
+                <div>ПОНЕДЕЛЬНИК</div>
+                <div>{this.parseDate(this.state.days[0])}</div>
+              </th>
+              <th className='book-entries__header'>
+                <div>ВТОРНИК</div>
+                <div>{this.parseDate(this.state.days[1])}</div>
+              </th>
+              <th className='book-entries__header'>
+                <div>СРЕДА</div>
+                <div>{this.parseDate(this.state.days[2])}</div>
+              </th>
+              <th className='book-entries__header'>
+                <div>ЧЕТВЕРГ</div>
+                <div>{this.parseDate(this.state.days[3])}</div>
+              </th>
+              <th className='book-entries__header'>
+                <div>ПЯТНИЦА</div>
+                <div>{this.parseDate(this.state.days[4])}</div>
+              </th>
+              <th className='book-entries__header'>
+                <div>СУББОТА</div>
+                <div>{this.parseDate(this.state.days[5])}</div>
+              </th>
+              <th className='book-entries__header'>
+                <div>ВОСКРЕСЕНЬЕ</div>
+                <div>{this.parseDate(this.state.days[6])}</div>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -89,17 +129,6 @@ class BookEntries extends React.Component {
           </tbody>
         </table>
       </div>
-
-      // <div className='book-entries'>
-      //   {
-      //     this.state.rooms.length > 0
-      //     && this.state.rooms
-      //       .map((room) => <Room deleteRoom={this.deleteRoom} info = {room} key={room.id} />)
-      //   }
-      //
-
-      // </div>
-
     );
   }
 }
