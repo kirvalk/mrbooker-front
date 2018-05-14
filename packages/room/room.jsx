@@ -1,8 +1,9 @@
 const React = require('react');
-const Entry = require('entry/entry.jsx');
 const Day = require('room/day.jsx');
 const DelIcon = require('icons/delete.jsx');
-const PenIcon = require('icons/pencil.jsx');
+const ProjectorIcon = require('icons/projector.jsx');
+const SoundIcon = require('icons/sound.jsx');
+const TelephoneIcon = require('icons/telephone.jsx');
 const PropTypes = require('prop-types');
 
 class Room extends React.Component {
@@ -25,9 +26,13 @@ class Room extends React.Component {
         <td className='room__title'>
           <div className='room__name'>
             {this.state.name}
-            <DelIcon deleteRoom={this.props.deleteRoom} id={id}/>
-            <PenIcon/>
           </div>
+          <div className='room__controls'>
+            <ProjectorIcon />
+            <SoundIcon />
+            <TelephoneIcon />
+          </div>
+            <DelIcon deleteRoom={this.props.deleteRoom} id={id}/>
         </td>
         {
           this.props.days
