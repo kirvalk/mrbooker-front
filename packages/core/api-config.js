@@ -14,8 +14,8 @@ module.exports = {
     method: 'POST',
   },
 
-  updateTask: {
-    path: '/api/v001/tasks/:id',
+  updateRoom: {
+    path: '/api/v001/rooms/:id',
     method: 'PATCH',
   },
 

@@ -7,6 +7,7 @@ class Room extends React.Component {
       <td className='day'>
         <div className='day__main'>
           <div className='day__name'>{this.props.day}</div>
+          <div className='day__user'>{this.props.entry.user}</div>
         </div>
 
       </td>
@@ -14,5 +15,8 @@ class Room extends React.Component {
   }
 }
 
-
+Room.propTypes = {
+  day: PropTypes.number,
+  entry: PropTypes.object,
+};
 module.exports = Room;

@@ -1,14 +1,28 @@
 const React = require('react');
 
 class TelephoneIcon extends React.Component {
-  // delRoom() {
-  //   const { id } = this.props;
-  //   this.props.deleteRoom(id);
-  // }
+  updateRoom() {
+    const { id } = this.props.room;
+    let { telephone } = this.props.room.equipment;
+    if (telephone === 1) {
+      telephone = 0;
+    } else {
+      telephone = 1;
+    }
+    const newParam = { equipment: { telephone } };
+    this.props.updateRoom(id, newParam);
+  }
+
+  getClassName() {
+    if (this.props.room.equipment.telephone === 1) {
+      return 'telephone-icon telephone-icon_active';
+    }
+    return 'telephone-icon';
+  }
 
   render() {
     return (
-      <svg className="telephone-icon" viewBox="0 0 503.596 503.596" xmlns="http://www.w3.org/2000/svg">
+      <svg className={this.getClassName()} onClick={this.updateRoom.bind(this)} viewBox="0 0 503.596 503.596" xmlns="http://www.w3.org/2000/svg">
         <path d="M184.908,120.562V68.718c0-18.368-14.664-31.34-33.032-31.34H96.568c-18.368,0-33.624,12.972-33.624,31.34v51.84
         c0,8.416,3.472,16.512,9.508,22.808c1.4,1.46,2.268,3.412,2.268,5.436l0.092,142.972c0,2.036-0.948,3.992-2.364,5.456
         c-6.02,6.268-9.508,14.36-9.508,22.776v51.852c0,18.368,15.32,35.336,33.684,35.336h55.312c18.368,0,32.968-16.968,32.968-35.336

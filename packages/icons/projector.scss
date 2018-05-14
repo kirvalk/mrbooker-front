@@ -5,6 +5,9 @@
   cursor: pointer;
 
   fill: #A8AAAA;
-  // fill: #28a745;
+  
+  &_active {
+    fill: #28a745;
+  }
   
 }

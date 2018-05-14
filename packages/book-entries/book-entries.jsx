@@ -7,9 +7,10 @@ const { responseStatuses } = require('core/constants');
 class BookEntries extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { rooms: [], days: [1, 2, 3, 4, 5, 6, 7] };
+    this.state = { rooms: [], days: [1, 1525885200000, 3, 4, 5, 6, 7] };
     this.addRoom = this.addRoom.bind(this);
     this.deleteRoom = this.deleteRoom.bind(this);
+    this.updateRoom = this.updateRoom.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +44,25 @@ class BookEntries extends React.Component {
     });
   }
 
+  updateRoom(id, newParams) {
+    const { rooms } = this.state;
+    const roomToUpdate = rooms.find((room) => room.id === id);
+    createRequest('updateRoom', { id }, newParams).then((response) => {
+      if (response.status === responseStatuses.OK) {
+        Object.keys(roomToUpdate).forEach((key) => {
+          if (!newParams[key]) return;
+          if (typeof roomToUpdate[key] === 'object' && roomToUpdate[key] !== null) {
+            Object.assign(roomToUpdate[key], newParams[key]);
+          } else {
+            roomToUpdate[key] = newParams[key];
+          }
+        });
+
+        this.setState({ rooms });
+      }
+    });
+  }
+
   render() {
     return (
       <div>
@@ -64,7 +84,7 @@ class BookEntries extends React.Component {
           {
             this.state.rooms.length > 0
             && this.state.rooms
-              .map((room) => <Room deleteRoom={this.deleteRoom} days={this.state.days} info = {room} key={room.id} />)
+              .map((room) => <Room updateRoom={this.updateRoom} deleteRoom={this.deleteRoom} days={this.state.days} info = {room} key={room.id} />)
           }
           </tbody>
         </table>

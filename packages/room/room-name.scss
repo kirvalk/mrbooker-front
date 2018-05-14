@@ -1,0 +1,10 @@
+.room__name {
+  cursor:pointer;
+}
+
+.room__input{
+  // display: none;
+  &_active {
+    display: block;
+  }
+}
