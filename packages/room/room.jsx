@@ -5,6 +5,8 @@ const ProjectorIcon = require('icons/projector.jsx');
 const SoundIcon = require('icons/sound.jsx');
 const TelephoneIcon = require('icons/telephone.jsx');
 const RoomName = require('room/room-name.jsx');
+const createRequest = require('core/create-request');
+const { responseStatuses } = require('core/constants');
 const PropTypes = require('prop-types');
 
 class Room extends React.Component {
@@ -12,6 +14,7 @@ class Room extends React.Component {
     super(props);
     this.state = this.props.info;
     this.getEntries = this.getEntries.bind(this);
+    this.bookRoom = this.bookRoom.bind(this);
   }
 
 
@@ -23,6 +26,25 @@ class Room extends React.Component {
   getEntries(date) {
     const entry = this.state.reserved.find((el) => el.date === date);
     return entry || {};
+  }
+
+  bookRoom(date, user) {
+    const { reserved } = this.state;
+    const newParams = { date, user };
+
+    createRequest('bookRoom', { id: this.state.id }, newParams).then((response) => {
+      if (response.status === responseStatuses.OK) {
+        const alreadyBooked = reserved.find((entry) => {
+          return entry.date === newParams.date;
+        });
+        if (alreadyBooked) {
+          reserved.splice(reserved.indexOf(alreadyBooked), 1);
+        } else {
+          reserved.push({ date: newParams.date, user: newParams.user });
+        }
+        this.setState({ reserved });
+      }
+    });
   }
 
   render() {
@@ -40,7 +62,7 @@ class Room extends React.Component {
         </td>
         {
           this.props.days
-            .map((day, index) => <Day day={day} key={index} entry={this.getEntries(day)} />)
+            .map((day, index) => <Day day={day} key={index} entry={this.getEntries(day)} bookRoom={this.bookRoom} />)
         }
       </tr>
     );

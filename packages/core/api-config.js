@@ -23,4 +23,9 @@ module.exports = {
     path: '/api/v001/rooms/:id',
     method: 'DELETE',
   },
+
+  bookRoom: {
+    path: '/api/v001/rooms/:id/book',
+    method: 'PATCH',
+  },
 };
