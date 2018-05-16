@@ -5,15 +5,17 @@ const Direction = require('controls/direction-button.jsx');
 const createRequest = require('core/create-request');
 const { responseStatuses } = require('core/constants');
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+const AddRoom = require('icons/add-room');
 
 class BookEntries extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { rooms: [], days: [1525626000000, 1525712400000, 1525798800000, 1525885200000, 1525971600000, 1526058000000, 1526144400000] };
+    this.state = { rooms: [], isAdding: false, days: [1525626000000, 1525712400000, 1525798800000, 1525885200000, 1525971600000, 1526058000000, 1526144400000] };
     this.addRoom = this.addRoom.bind(this);
     this.deleteRoom = this.deleteRoom.bind(this);
     this.updateRoom = this.updateRoom.bind(this);
     this.moveWeek = this.moveWeek.bind(this);
+    this.showAddForm = this.showAddForm.bind(this);
   }
 
   componentDidMount() {
@@ -28,9 +30,13 @@ class BookEntries extends React.Component {
     createRequest('addRoom', {}, obj).then((response) => {
       if (response.status === responseStatuses.OK) {
         rooms.push(response.data);
-        this.setState({ rooms });
+        this.setState({ rooms, isAdding: false });
       }
     });
+  }
+
+  showAddForm() {
+    this.setState({ isAdding: !this.state.isAdding });
   }
 
   deleteRoom(id) {
@@ -84,10 +90,17 @@ class BookEntries extends React.Component {
   render() {
     return (
       <div>
-        <AddForm addRoom={this.addRoom} />
+        <header className='header'>
+          MR Booker
+          <AddRoom showAddForm={this.showAddForm} />
+        </header>
         <Direction moveWeek={this.moveWeek} dir={'prev'} />
         <Direction moveWeek={this.moveWeek} dir={'next'} />
           <div className='rooms'>
+            {
+              this.state.isAdding
+              && <AddForm addRoom={this.addRoom} />
+            }
             <div className="rooms__item rooms__item-header">
               <div className="rooms__cell">
                 <div className="room-t">КОМНАТА</div>

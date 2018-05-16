@@ -56,7 +56,8 @@ class Day extends React.Component {
         <ReactCSSTransitionGroup
           transitionName="slideup"
           transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}>
+          transitionLeaveTimeout={300}
+          >
         {
           this.state.isHovered
           && <div className='day__book' onClick={this.showUserInput}>{Object.keys(this.props.entry).length !== 0 ? 'Снять' : 'Занять'}</div>

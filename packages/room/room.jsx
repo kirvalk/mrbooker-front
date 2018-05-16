@@ -52,7 +52,7 @@ class Room extends React.Component {
     return (
       <div className="rooms__item">
         <div className="rooms__cell">
-          <RoomName name={this.props.info.name} id={this.props.info.id} />
+          <RoomName name={this.props.info.name} capacity={this.props.info.capacity} id={this.props.info.id} updateRoom = {this.props.updateRoom} />
           <div className='room__controls'>
             <ProjectorIcon updateRoom={this.props.updateRoom} room={this.props.info} />
             <SoundIcon updateRoom={this.props.updateRoom} room={this.props.info} />

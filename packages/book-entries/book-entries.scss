@@ -1,4 +1,6 @@
 .rooms {
+  position: relative;
+
   width: 950px;
 
   &__item {
@@ -25,7 +27,10 @@
 
     &:first-child {
       width: 12.5%;
+      padding: 4px;
     }
+    
+    
   }
 
   &__week-day {
@@ -46,6 +51,18 @@
   }
 }
 
+.header {
+  height: 50px;
+  padding: 5px;
+
+  background-color: #EAAE8B;
+  &:after {
+    display: block;
+    clear: both;
+
+    content: '';
+  }
+}
 .room-t {
   text-align: center;
 
