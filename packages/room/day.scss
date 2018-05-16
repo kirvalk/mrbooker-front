@@ -1,23 +1,50 @@
 .day {
-  width: 12.5%;
-  padding: 6px 1px 6px 1px;
   position: relative;
 
-  border: 1px solid #ddd;
-  &__main {
-    min-height: 100px;
-  }
+  overflow: hidden;
+
   &__name {
     text-align: right;
   }
   &__book {
-    cursor: pointer;
     position: absolute;
     bottom: 0;
-    height: 30px;
-    line-height: 30px;
-    width: 80px;
-    padding-left: 5px;
+
+    width: 100%;
+    height: 25px;
+
+    cursor: pointer;
+    text-align: center;
+
+    background-color: #f2b632;
+
+    line-height: 25px;
+  }
+  &__user {
+    height: 45px;
+    margin-top: 10px;
+
+    text-align: center;
+
     background-color: skyblue;
+  }
+}
+
+.slideup {
+  &-enter {
+    height: 0;
+    &-active {
+      height: 25px;
+
+      transition: height 300ms ease;
+    }
+  }
+  &-leave {
+    height: 25px;
+    &-active {
+      height: 0;
+
+      transition: height 300ms ease;
+    }
   }
 }

@@ -50,21 +50,21 @@ class Room extends React.Component {
   render() {
     const { id } = this.props.info;
     return (
-      <tr className='room'>
-        <td className='room__title'>
+      <div className="rooms__item">
+        <div className="rooms__cell">
           <RoomName name={this.props.info.name} id={this.props.info.id} />
           <div className='room__controls'>
             <ProjectorIcon updateRoom={this.props.updateRoom} room={this.props.info} />
             <SoundIcon updateRoom={this.props.updateRoom} room={this.props.info} />
             <TelephoneIcon updateRoom={this.props.updateRoom} room={this.props.info} />
           </div>
-            <DelIcon deleteRoom={this.props.deleteRoom} id={id}/>
-        </td>
+          <DelIcon deleteRoom={this.props.deleteRoom} id={id}/>
+        </div>
         {
           this.props.days
             .map((day, index) => <Day day={day} key={index} entry={this.getEntries(day)} bookRoom={this.bookRoom} />)
         }
-      </tr>
+      </div>
     );
   }
 }

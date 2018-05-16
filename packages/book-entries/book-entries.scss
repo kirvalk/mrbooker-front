@@ -1,12 +1,72 @@
-.book-entries {
-  float: right;
-  width: 800px;
-  margin: 0 auto; border-collapse: collapse;
+.rooms {
+  width: 950px;
 
-  &__header {
+  &__item {
+    height: 100px;
+ 
+    &-header {
+      height: 50px;
+    }
+  }
+
+
+  &__cell {
+    position: relative;
+
+    display: inline-block;
+    overflow: hidden;
+
+    width: 12.5%;
+    height: 100%;
+
+    vertical-align: top;
+
     border: 1px solid #ddd;
 
-    font-size: 13px;
-    font-weight: 300;
+    &:first-child {
+      width: 12.5%;
+    }
+  }
+
+  &__week-day {
+    height: 30px;
+
+    text-align: center;
+
+    font-size: 14px;
+    line-height: 30px;
+  }
+  &__date {
+    height: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.room-t {
+  text-align: center;
+
+  line-height: 50px;
+}
+
+.fade {
+  &-enter {
+    opacity: 0;
+    &-active {
+      transition: opacity 300ms ease;
+
+      opacity: 1;
+    }
+  }
+  &-leave {
+    opacity: 1;
+    &-active {
+      transition: opacity 300ms ease;
+
+      opacity: 0;
+    }
   }
 }

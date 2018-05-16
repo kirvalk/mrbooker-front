@@ -8,6 +8,7 @@ class UserInput extends React.Component {
   }
 
   bookRoom() {
+    if (this.textInput.value === '') return;
     this.props.bookRoom(this.textInput.value);
   }
 
@@ -16,8 +17,8 @@ class UserInput extends React.Component {
     return (
       <div className='user-input'>
         <div className='user-input__name'>Как вас зовут?</div>
-        <input className='user-input__input' type="text" ref={(input) => { this.textInput = input; }} />
-        <button onClick={this.bookRoom}>ОК</button>
+        <input className='user-input__input' type="text" ref={(input) => { this.textInput = input; }}/>
+        <button className='user-input__button' onClick={this.bookRoom}>ОК</button>
       </div>
     );
   }

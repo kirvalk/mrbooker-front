@@ -1,16 +1,4 @@
-.room {
-  &__title {
-    position: relative;
-
-    width: 12.5%;
-
-    border: 1px solid #ddd;
-  }
-
-  &__controls {
-    display: flex;
-    justify-content: space-around;
-    
-  }
-
+.room__controls {
+  display: flex;
+  justify-content: space-around;
 }

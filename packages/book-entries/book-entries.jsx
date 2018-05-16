@@ -4,6 +4,7 @@ const Room = require('room/room.jsx');
 const Direction = require('controls/direction-button.jsx');
 const createRequest = require('core/create-request');
 const { responseStatuses } = require('core/constants');
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class BookEntries extends React.Component {
   constructor(props) {
@@ -86,48 +87,51 @@ class BookEntries extends React.Component {
         <AddForm addRoom={this.addRoom} />
         <Direction moveWeek={this.moveWeek} dir={'prev'} />
         <Direction moveWeek={this.moveWeek} dir={'next'} />
-        <table className='book-entries'>
-          <thead>
-            <tr>
-              <th className='book-entries__header'>КОМНАТА</th>
-              <th className='book-entries__header'>
-                <div>ПОНЕДЕЛЬНИК</div>
-                <div>{this.parseDate(this.state.days[0])}</div>
-              </th>
-              <th className='book-entries__header'>
-                <div>ВТОРНИК</div>
-                <div>{this.parseDate(this.state.days[1])}</div>
-              </th>
-              <th className='book-entries__header'>
-                <div>СРЕДА</div>
-                <div>{this.parseDate(this.state.days[2])}</div>
-              </th>
-              <th className='book-entries__header'>
-                <div>ЧЕТВЕРГ</div>
-                <div>{this.parseDate(this.state.days[3])}</div>
-              </th>
-              <th className='book-entries__header'>
-                <div>ПЯТНИЦА</div>
-                <div>{this.parseDate(this.state.days[4])}</div>
-              </th>
-              <th className='book-entries__header'>
-                <div>СУББОТА</div>
-                <div>{this.parseDate(this.state.days[5])}</div>
-              </th>
-              <th className='book-entries__header'>
-                <div>ВОСКРЕСЕНЬЕ</div>
-                <div>{this.parseDate(this.state.days[6])}</div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-            this.state.rooms.length > 0
-            && this.state.rooms
-              .map((room) => <Room updateRoom={this.updateRoom} deleteRoom={this.deleteRoom} days={this.state.days} info = {room} key={room.id} />)
-          }
-          </tbody>
-        </table>
+          <div className='rooms'>
+            <div className="rooms__item rooms__item-header">
+              <div className="rooms__cell">
+                <div className="room-t">КОМНАТА</div>
+              </div>
+              <div className="rooms__cell">
+                <div className="rooms__week-day">ПОНЕДЕЛЬНИК</div>
+                <div className="rooms__date">{this.parseDate(this.state.days[0])}</div>
+              </div>
+              <div className="rooms__cell">
+                <div className="rooms__week-day">ВТОРНИК</div>
+                <div className="rooms__date">{this.parseDate(this.state.days[1])}</div>
+              </div>
+              <div className="rooms__cell">
+                <div className="rooms__week-day">СРЕДА</div>
+                <div className="rooms__date">{this.parseDate(this.state.days[2])}</div>
+              </div>
+              <div className="rooms__cell">
+                <div className="rooms__week-day">ЧЕТВЕРГ</div>
+                <div className="rooms__date">{this.parseDate(this.state.days[3])}</div>
+              </div>
+              <div className="rooms__cell">
+                <div className="rooms__week-day">ПЯТНИЦА</div>
+                <div className="rooms__date">{this.parseDate(this.state.days[4])}</div>
+              </div>
+              <div className="rooms__cell">
+                <div className="rooms__week-day">СУББОТА</div>
+                <div className="rooms__date">{this.parseDate(this.state.days[5])}</div>
+              </div>
+              <div className="rooms__cell">
+                <div className="rooms__week-day">ВОСКРЕСЕНЬЕ</div>
+                <div className="rooms__date">{this.parseDate(this.state.days[6])}</div>
+              </div>
+            </div>
+            <ReactCSSTransitionGroup
+              transitionName="fade"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}>
+            {
+              this.state.rooms.length > 0
+              && this.state.rooms
+                .map((room) => <Room updateRoom={this.updateRoom} deleteRoom={this.deleteRoom} days={this.state.days} info = {room} key={room.id} />)
+            }
+            </ReactCSSTransitionGroup>
+          </div>
       </div>
     );
   }
