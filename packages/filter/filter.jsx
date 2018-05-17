@@ -7,7 +7,7 @@ class Filter extends React.Component {
       projector: undefined,
       sound: undefined,
       telephone: undefined,
-      capacity: 0,
+      capacity: 10,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -67,7 +67,9 @@ class Filter extends React.Component {
           />
         </label>
         <input type="range" min="0" max="80"
+          className="capacity-range"
           name="capacity"
+          defaultValue="10"
           onChange={this.handleChange} />
         <button type='submit'>ПРИМЕНИТЬ</button>
       </form>
