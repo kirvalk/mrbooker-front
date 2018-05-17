@@ -102,12 +102,15 @@ class BookEntries extends React.Component {
       <div>
         <header className='header'>
           MR Booker
-          <Filter filterRooms={this.filterRooms} />
-
           <AddRoom showAddForm={this.showAddForm} />
+
         </header>
-        <Direction moveWeek={this.moveWeek} dir={'prev'} />
-        <Direction moveWeek={this.moveWeek} dir={'next'} />
+        <div className="controls">
+          <Filter filterRooms={this.filterRooms} />
+          <Direction moveWeek={this.moveWeek} dir={'prev'} />
+          <Direction moveWeek={this.moveWeek} dir={'next'} />
+
+        </div>
           <div className='rooms'>
             {
               this.state.isAdding

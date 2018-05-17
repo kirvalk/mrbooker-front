@@ -1,3 +1,8 @@
 .filter {
   float: left;
+  &__capacity {
+    &_val {
+      display: inline-block;
+    }
+  }
 }

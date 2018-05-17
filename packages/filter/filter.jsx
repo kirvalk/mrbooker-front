@@ -1,4 +1,5 @@
 const React = require('react');
+const moment = require('moment');
 
 class Filter extends React.Component {
   constructor(props) {
@@ -7,7 +8,8 @@ class Filter extends React.Component {
       projector: undefined,
       sound: undefined,
       telephone: undefined,
-      capacity: 10,
+      capacity: 0,
+      reserved: undefined,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -32,6 +34,8 @@ class Filter extends React.Component {
     let value;
     if (target.type === 'checkbox') {
       value = Number(target.checked) || undefined;
+    } else if (target.type === 'date') {
+      value = moment(target.value).startOf('day').valueOf() || undefined;
     } else {
       value = Number(target.value);
     }
@@ -39,38 +43,51 @@ class Filter extends React.Component {
     this.setState({ [name]: value });
   }
 
+  date(ev) {
+    console.log(moment().startOf('day').valueOf());
+    console.log(moment(1526490000000));
+  }
+
   render() {
     return (
       <form className='filter' onSubmit={this.handleSubmit}>
         <label>
-          Проектор
           <input
             type="checkbox"
             name="projector"
             onChange={this.handleChange}
-          />
+            />
+            Проектор
         </label>
         <label>
-          Звук
           <input
             type="checkbox"
             name="sound"
             onChange={this.handleChange}
-          />
+            />
         </label>
+            Звук
         <label>
-          Телефон
           <input
             type="checkbox"
             name="telephone"
             onChange={this.handleChange}
-          />
+            />
+            Телефон
         </label>
         <input type="range" min="0" max="80"
-          className="capacity-range"
+          className="filter__capacity"
           name="capacity"
-          defaultValue="10"
+          defaultValue="0"
           onChange={this.handleChange} />
+        <div className="filter__capacity_val">
+          {this.state.capacity}
+        </div>
+        <input type="date"
+          className='filter__date'
+          name="reserved"
+          onChange={this.handleChange}
+        />
         <button type='submit'>ПРИМЕНИТЬ</button>
       </form>
     );
