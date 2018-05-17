@@ -1,4 +1,5 @@
 const React = require('react');
+const moment = require('moment');
 const AddForm = require('add-form/add-form.jsx');
 const Room = require('room/room.jsx');
 const Direction = require('controls/direction-button.jsx');
@@ -11,13 +12,24 @@ const Filter = require('filter/filter.jsx');
 class BookEntries extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { rooms: [], isAdding: false, days: [1525626000000, 1525712400000, 1525798800000, 1525885200000, 1525971600000, 1526058000000, 1526144400000] };
+    moment.locale('ru');
+
+    this.state = { rooms: [], isAdding: false, days: this.getCurrentDates() };
     this.addRoom = this.addRoom.bind(this);
     this.deleteRoom = this.deleteRoom.bind(this);
     this.updateRoom = this.updateRoom.bind(this);
     this.moveWeek = this.moveWeek.bind(this);
     this.showAddForm = this.showAddForm.bind(this);
     this.filterRooms = this.filterRooms.bind(this);
+  }
+
+  getCurrentDates() {
+    const firstDay = moment().startOf('week').startOf('day');
+    const currentDates = [];
+    for (let i = 0; i < 7; i += 1) {
+      currentDates.push(moment(firstDay).add(i, 'd').valueOf());
+    }
+    return currentDates;
   }
 
   componentDidMount() {
@@ -79,20 +91,14 @@ class BookEntries extends React.Component {
     });
   }
 
-  parseDate(ms) {
-    const date = new Date(ms);
-    const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-      'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-    return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-  }
-
   moveWeek(direction) {
-    const weekMs = 86400000 * 7;
     if (direction === 'prev') {
-      const days = this.state.days.map((day) => day - weekMs);
+      const days = this.state.days.map((day) => moment(day).subtract(1, 'd').valueOf());
+      // const days = this.state.days.map((day) => moment(day).subtract(1, 'd').valueOf());
       this.setState({ days });
     } else if (direction === 'next') {
-      const days = this.state.days.map((day) => day + weekMs);
+      const days = this.state.days.map((day) => moment(day).add(1, 'd').valueOf());
+      // const days = this.state.days.map((day) => moment(day).add(1, 'd').valueOf());
       this.setState({ days });
     }
   }
@@ -103,13 +109,11 @@ class BookEntries extends React.Component {
         <header className='header'>
           MR Booker
           <AddRoom showAddForm={this.showAddForm} />
-
         </header>
         <div className="controls">
           <Filter filterRooms={this.filterRooms} />
           <Direction moveWeek={this.moveWeek} dir={'prev'} />
           <Direction moveWeek={this.moveWeek} dir={'next'} />
-
         </div>
           <div className='rooms'>
             {
@@ -120,34 +124,20 @@ class BookEntries extends React.Component {
               <div className="rooms__cell">
                 <div className="room-t">КОМНАТА</div>
               </div>
-              <div className="rooms__cell">
-                <div className="rooms__week-day">ПОНЕДЕЛЬНИК</div>
-                <div className="rooms__date">{this.parseDate(this.state.days[0])}</div>
-              </div>
-              <div className="rooms__cell">
-                <div className="rooms__week-day">ВТОРНИК</div>
-                <div className="rooms__date">{this.parseDate(this.state.days[1])}</div>
-              </div>
-              <div className="rooms__cell">
-                <div className="rooms__week-day">СРЕДА</div>
-                <div className="rooms__date">{this.parseDate(this.state.days[2])}</div>
-              </div>
-              <div className="rooms__cell">
-                <div className="rooms__week-day">ЧЕТВЕРГ</div>
-                <div className="rooms__date">{this.parseDate(this.state.days[3])}</div>
-              </div>
-              <div className="rooms__cell">
-                <div className="rooms__week-day">ПЯТНИЦА</div>
-                <div className="rooms__date">{this.parseDate(this.state.days[4])}</div>
-              </div>
-              <div className="rooms__cell">
-                <div className="rooms__week-day">СУББОТА</div>
-                <div className="rooms__date">{this.parseDate(this.state.days[5])}</div>
-              </div>
-              <div className="rooms__cell">
-                <div className="rooms__week-day">ВОСКРЕСЕНЬЕ</div>
-                <div className="rooms__date">{this.parseDate(this.state.days[6])}</div>
-              </div>
+              {
+                this.state.days.map((day, index) => {
+                  return (
+                    <div className="rooms__cell" key={index}>
+                      <div className="rooms__week-day">
+                        {moment(day).format('dddd').toUpperCase()}
+                      </div>
+                      <div className="rooms__date">
+                        {moment(day).format('DD MMMM YY')}
+                      </div>
+                    </div>
+                  );
+                })
+              }
             </div>
             <ReactCSSTransitionGroup
               transitionName="fade"
@@ -156,7 +146,11 @@ class BookEntries extends React.Component {
             {
               this.state.rooms.length > 0
               && this.state.rooms
-                .map((room) => <Room updateRoom={this.updateRoom} deleteRoom={this.deleteRoom} days={this.state.days} info = {room} key={room.id} />)
+                .map((room) => <Room updateRoom={this.updateRoom}
+                                     deleteRoom={this.deleteRoom}
+                                     days={this.state.days}
+                                     info = {room}
+                                     key={room.id} />)
             }
             </ReactCSSTransitionGroup>
           </div>

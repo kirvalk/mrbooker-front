@@ -40,7 +40,9 @@ class Day extends React.Component {
 
   render() {
     return (
-      <div className='rooms__cell day' onMouseEnter={this.showBookButton.bind(this)} onMouseLeave ={this.hideBookButton.bind(this)}>
+      <div className='rooms__cell day'
+           onMouseEnter={this.showBookButton.bind(this)}
+           onMouseLeave ={this.hideBookButton.bind(this)}>
         <ReactCSSTransitionGroup
           transitionName="slidedown"
           transitionEnterTimeout={500}
@@ -60,7 +62,9 @@ class Day extends React.Component {
           >
         {
           this.state.isHovered
-          && <div className='day__book' onClick={this.showUserInput}>{Object.keys(this.props.entry).length !== 0 ? 'Снять' : 'Занять'}</div>
+          && <div className='day__book' onClick={this.showUserInput}>
+               {Object.keys(this.props.entry).length !== 0 ? 'Снять' : 'Занять'}
+              </div>
         }
         </ReactCSSTransitionGroup>
       </div>
