@@ -32,7 +32,7 @@ const compileUrl = (url, params) => {
   let resultString = resultArr.join('/');
 
   Object.keys(options).forEach((key, index) => {
-    resultString += `${index === 0 ? '&' : '?'}${key}=${options[key]}`;
+    resultString += `${index === 0 ? '?' : '&'}${key}=${options[key]}`;
   });
 
   return resultString;

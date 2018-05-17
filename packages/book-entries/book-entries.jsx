@@ -6,6 +6,7 @@ const createRequest = require('core/create-request');
 const { responseStatuses } = require('core/constants');
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 const AddRoom = require('icons/add-room');
+const Filter = require('filter/filter.jsx');
 
 class BookEntries extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class BookEntries extends React.Component {
     this.updateRoom = this.updateRoom.bind(this);
     this.moveWeek = this.moveWeek.bind(this);
     this.showAddForm = this.showAddForm.bind(this);
+    this.filterRooms = this.filterRooms.bind(this);
   }
 
   componentDidMount() {
@@ -69,6 +71,14 @@ class BookEntries extends React.Component {
     });
   }
 
+  filterRooms(queryOptions) {
+    createRequest('fetchRooms', queryOptions).then((response) => {
+      if (response.status === responseStatuses.OK) {
+        this.setState({ rooms: response.data || [] });
+      }
+    });
+  }
+
   parseDate(ms) {
     const date = new Date(ms);
     const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
@@ -92,6 +102,8 @@ class BookEntries extends React.Component {
       <div>
         <header className='header'>
           MR Booker
+          <Filter filterRooms={this.filterRooms} />
+
           <AddRoom showAddForm={this.showAddForm} />
         </header>
         <Direction moveWeek={this.moveWeek} dir={'prev'} />
