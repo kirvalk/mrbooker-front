@@ -1,8 +1,19 @@
 .filter {
-  float: left;
+  &__elem {
+    display: inline-block;
+
+    vertical-align: middle;
+    & + & {
+      margin-left:30px;
+    }
+  }
+
   &__capacity {
+    display: block;
+
+    width: 160px;
     &_val {
-      display: inline-block;
+      text-align: center;
     }
   }
 }

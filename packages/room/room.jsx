@@ -12,9 +12,11 @@ const PropTypes = require('prop-types');
 class Room extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.info;
+    this.state = Object.assign(this.props.info, { isHovered: false });
     this.getEntries = this.getEntries.bind(this);
     this.bookRoom = this.bookRoom.bind(this);
+    this.mouseEnterHandler = this.mouseEnterHandler.bind(this);
+    this.mouseLeaveHandler = this.mouseLeaveHandler.bind(this);
   }
 
 
@@ -47,18 +49,31 @@ class Room extends React.Component {
     });
   }
 
+  mouseEnterHandler() {
+    this.setState({ isHovered: true });
+  }
+
+  mouseLeaveHandler() {
+    this.setState({ isHovered: false });
+  }
+
   render() {
     const { id } = this.props.info;
     return (
-      <div className="rooms__item">
+      <div className="rooms__item"
+            onMouseEnter={this.mouseEnterHandler}
+            onMouseLeave={this.mouseLeaveHandler}>
         <div className="rooms__cell">
           <RoomName name={this.props.info.name} capacity={this.props.info.capacity} id={this.props.info.id} updateRoom = {this.props.updateRoom} />
           <div className='room__controls'>
             <ProjectorIcon updateRoom={this.props.updateRoom} room={this.props.info} />
             <SoundIcon updateRoom={this.props.updateRoom} room={this.props.info} />
             <TelephoneIcon updateRoom={this.props.updateRoom} room={this.props.info} />
+            {
+              this.state.isHovered
+              && <DelIcon deleteRoom={this.props.deleteRoom} id={id}/>
+            }
           </div>
-          <DelIcon deleteRoom={this.props.deleteRoom} id={id}/>
         </div>
         {
           this.props.days

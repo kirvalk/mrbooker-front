@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const CapIcon = require('icons/capacity');
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class RoomName extends React.Component {
   constructor(props) {
@@ -43,7 +44,11 @@ class RoomName extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="room__info">
+        <ReactCSSTransitionGroup
+              transitionName="left-slide"
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}>
         {
           !this.state.changeCap
           && <div className='room__cap' onClick={this.startEditCap.bind(this)}>
@@ -53,20 +58,37 @@ class RoomName extends React.Component {
               <CapIcon />
             </div>
         }
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+              transitionName="right-slide"
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}>
+
         {
           this.state.changeCap
-          && <input type="text" onBlur={this.endEditCap.bind(this)} className='room__input-cap' ref={(input) => { this.capInput = input; }}/>
+          && <input autoFocus type="text" onBlur={this.endEditCap.bind(this)} className='room__input-cap' ref={(input) => { this.capInput = input; }}/>
         }
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+              transitionName="left-slide"
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}>
         {
           !this.state.changeName
             && <div className='room__name' onClick={this.startEdit.bind(this)}>
             {this.props.name}
           </div>
         }
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+              transitionName="right-slide"
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}>
         {
           this.state.changeName
-          && <input type="text" onBlur={this.endEdit.bind(this)} className='room__input-name' ref={(input) => { this.nameInput = input; }}/>
+          && <input autoFocus type="text" onBlur={this.endEdit.bind(this)} className='room__input-name' ref={(input) => { this.nameInput = input; }}/>
         }
+        </ReactCSSTransitionGroup>
 
       </div>
     );

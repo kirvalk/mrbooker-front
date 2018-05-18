@@ -2,7 +2,7 @@ const React = require('react');
 const moment = require('moment');
 const AddForm = require('add-form/add-form.jsx');
 const Room = require('room/room.jsx');
-const Direction = require('controls/direction-button.jsx');
+const DirectionButton = require('controls/direction-button.jsx');
 const createRequest = require('core/create-request');
 const { responseStatuses } = require('core/constants');
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
@@ -91,14 +91,14 @@ class BookEntries extends React.Component {
     });
   }
 
-  moveWeek(direction) {
+  moveWeek(ev) {
+    const { direction } = ev.target.dataset;
+    const { step } = ev.target.dataset;
     if (direction === 'prev') {
-      const days = this.state.days.map((day) => moment(day).subtract(1, 'd').valueOf());
-      // const days = this.state.days.map((day) => moment(day).subtract(1, 'd').valueOf());
+      const days = this.state.days.map((day) => moment(day).subtract(1, step).valueOf());
       this.setState({ days });
     } else if (direction === 'next') {
-      const days = this.state.days.map((day) => moment(day).add(1, 'd').valueOf());
-      // const days = this.state.days.map((day) => moment(day).add(1, 'd').valueOf());
+      const days = this.state.days.map((day) => moment(day).add(1, step).valueOf());
       this.setState({ days });
     }
   }
@@ -112,9 +112,11 @@ class BookEntries extends React.Component {
         </header>
         <div className="controls">
           <Filter filterRooms={this.filterRooms} />
-          <Direction moveWeek={this.moveWeek} dir={'prev'} />
-          <Direction moveWeek={this.moveWeek} dir={'next'} />
         </div>
+          <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'week'} />
+          <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'day'} />
+          <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'day'} />
+          <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'week'} />
           <div className='rooms'>
             {
               this.state.isAdding
@@ -141,8 +143,8 @@ class BookEntries extends React.Component {
             </div>
             <ReactCSSTransitionGroup
               transitionName="fade"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}>
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={300}>
             {
               this.state.rooms.length > 0
               && this.state.rooms

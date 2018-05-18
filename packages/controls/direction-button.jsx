@@ -1,12 +1,20 @@
 const React = require('react');
 
-class Direction extends React.Component {
+class DirectionButton extends React.Component {
   render() {
     return (
-      <button onClick={this.props.moveWeek.bind(this, this.props.dir)}>{this.props.dir}</button>
+      <button
+        data-direction={this.props.dir}
+        data-step={this.props.step}
+        onClick={this.props.moveWeek}>
+        {this.props.dir === 'prev' && this.props.step === 'week' && '<<'}
+        {this.props.dir === 'next' && this.props.step === 'week' && '>>'}
+        {this.props.dir === 'prev' && this.props.step === 'day' && '<'}
+        {this.props.dir === 'next' && this.props.step === 'day' && '>'}
+        </button>
     );
   }
 }
 
 
-module.exports = Direction;
+module.exports = DirectionButton;

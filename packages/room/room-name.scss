@@ -1,12 +1,23 @@
 .room__name {
-  margin: 2px -4px 0 -4px;
+  position: absolute;
+  top: 26px;
+  left:4px;
+
+  width: 108.75px;
 
   cursor: pointer;
 
   background-color: skyblue;
 }
-
+.room__info {
+  width: 108.75px;
+  height: 50px;
+}
 .room__cap {
+  position: absolute;
+  top: 4px;
+
+  width: 108.75px;
   height: 20px;
 
   cursor: pointer;
@@ -31,9 +42,11 @@
 }
 
 .room__input-name {
-  width: 100%;
+  position: absolute;
+  top: 28px;
+
+  width: 108.75px;
   height: 20px;
-  margin-bottom: 2px;
   padding: 0 5px;
 
   border: 1px solid gray;
@@ -41,9 +54,11 @@
 }
 
 .room__input-cap {
-  width: 100%;
+  position: absolute;
+  top: 2px;
+
+  width: 108.75px;
   height: 20px;
-  margin-bottom: 2px;
   padding: 0 5px;
 
   border: 1px solid gray;
@@ -52,3 +67,35 @@
 }
 
 
+.left-slide {
+  &-enter {
+    transform: translateX(120px);
+    &-active {
+      transition: transform 1000ms ease;
+      transform: translateX(0);
+    }
+  }
+  &-leave {
+    transform: translateX(0);
+    &-active {
+      transition: transform 1000ms ease;
+      transform: translateX(120px);
+    }
+  }
+}
+.right-slide {
+  &-enter {
+    transform: translateX(-120px);
+    &-active {
+      transition: transform 1000ms ease;
+      transform: translateX(0);
+    }
+  }
+  &-leave {
+    transform: translateX(0);
+    &-active {
+      transition: transform 1000ms ease;
+      transform: translateX(-120px);
+    }
+  }
+}

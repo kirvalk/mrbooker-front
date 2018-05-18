@@ -43,15 +43,14 @@ class Filter extends React.Component {
     this.setState({ [name]: value });
   }
 
-  date(ev) {
-    console.log(moment().startOf('day').valueOf());
-    console.log(moment(1526490000000));
-  }
-
   render() {
     return (
       <form className='filter' onSubmit={this.handleSubmit}>
-        <label>
+        <div className="filter__description">
+          Выберите неообходимое оборудомавание и вместимость,
+          а так же дату, на которую вы хотите забронировать комнату
+        </div>
+        <label className="filter__elem">
           <input
             type="checkbox"
             name="projector"
@@ -59,15 +58,15 @@ class Filter extends React.Component {
             />
             Проектор
         </label>
-        <label>
+        <label className="filter__elem">
           <input
             type="checkbox"
             name="sound"
             onChange={this.handleChange}
             />
-        </label>
             Звук
-        <label>
+        </label>
+        <label className="filter__elem">
           <input
             type="checkbox"
             name="telephone"
@@ -75,20 +74,22 @@ class Filter extends React.Component {
             />
             Телефон
         </label>
-        <input type="range" min="0" max="80"
-          className="filter__capacity"
-          name="capacity"
-          defaultValue="0"
-          onChange={this.handleChange} />
-        <div className="filter__capacity_val">
-          {this.state.capacity}
+        <div className="filter__elem">
+          <input type="range" min="0" max="80"
+            className="filter__capacity"
+            name="capacity"
+            defaultValue="0"
+            onChange={this.handleChange} />
+          <div className="filter__capacity_val">
+            {`Вместимость, мин: ${this.state.capacity}`}
+          </div>
         </div>
         <input type="date"
-          className='filter__date'
+          className='filter__date filter__elem'
           name="reserved"
           onChange={this.handleChange}
         />
-        <button type='submit'>ПРИМЕНИТЬ</button>
+        <button type='submit' className="filter__elem">ПРИМЕНИТЬ</button>
       </form>
     );
   }
