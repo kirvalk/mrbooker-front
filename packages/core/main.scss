@@ -8,6 +8,7 @@
 @import 'packages/icons/projector.scss';
 @import 'packages/icons/sound.scss';
 @import 'packages/icons/telephone.scss';
+@import 'packages/icons/logo.scss';
 @import 'packages/icons/add-room.scss';
 @import 'packages/room/room-name.scss';
 @import 'packages/room/user-input.scss';
@@ -15,6 +16,7 @@
 
 
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+@import url('https://fonts.googleapis.com/css?family=Atma');
 
 html,
 body {
@@ -41,12 +43,14 @@ ul, li {
   padding: 0;
 }
 
+
 .main {
   position: relative;
 
   overflow: hidden;
 
   width: 1000px;
+  min-height: 360px;
   margin: 0 auto;
   padding: 15px;
 

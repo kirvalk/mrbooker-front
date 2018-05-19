@@ -1,3 +1,5 @@
+@import 'packages/core/vars.scss';
+
 .day {
   position: relative;
 
@@ -16,7 +18,7 @@
     cursor: pointer;
     text-align: center;
 
-    background-color: #f2b632;
+    background-color: $color-3;
 
     line-height: 25px;
   }
@@ -26,7 +28,7 @@
 
     text-align: center;
 
-    background-color: skyblue;
+    background-color: $color-1;
   }
 }
 

@@ -47,7 +47,7 @@ class Filter extends React.Component {
     return (
       <form className='filter' onSubmit={this.handleSubmit}>
         <div className="filter__description">
-          Выберите неообходимое оборудомавание и вместимость,
+          Выберите неообходимое оборудование и вместимость,
           а так же дату, на которую вы хотите забронировать комнату
         </div>
         <label className="filter__elem">

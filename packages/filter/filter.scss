@@ -1,4 +1,5 @@
 .filter {
+  padding: 5px 0 0 10px;
   &__elem {
     display: inline-block;
 
@@ -15,5 +16,12 @@
     &_val {
       text-align: center;
     }
+  }
+
+  &__description {
+    color: gray;
+
+    font-size: 14px;
+    font-style: italic;
   }
 }

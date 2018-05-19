@@ -1,12 +1,25 @@
+@import 'packages/core/vars.scss';
+
 .add-form {
   position: absolute;
   z-index: 10;
-  top: 65px;
-  right: 15px;
+  top: 80px;
+  right: 35px;
 
   width: 300px;
   padding: 15px;
 
-  background-color: hotpink;
+  color: #c8f7c5;
+  border-radius: 15px;
+  background-color: $color-2;
+
+  &__title, &__equipment {
+    margin-bottom: 5px;
+  }
+
+  &__button {
+    margin-top: 5px;
+  }
+  
 }
 

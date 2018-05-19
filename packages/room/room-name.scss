@@ -1,13 +1,16 @@
+@import 'packages/core/vars.scss';
+
 .room__name {
   position: absolute;
-  top: 26px;
+  top: 4px;
   left:4px;
 
   width: 108.75px;
+  padding: 0 2px;
 
   cursor: pointer;
 
-  background-color: skyblue;
+  background-color: $color-1;
 }
 .room__info {
   width: 108.75px;
@@ -15,7 +18,7 @@
 }
 .room__cap {
   position: absolute;
-  top: 4px;
+  top: 30px;
 
   width: 108.75px;
   height: 20px;
@@ -43,7 +46,7 @@
 
 .room__input-name {
   position: absolute;
-  top: 28px;
+  top: 6px;
 
   width: 108.75px;
   height: 20px;
@@ -55,7 +58,7 @@
 
 .room__input-cap {
   position: absolute;
-  top: 2px;
+  top: 32px;
 
   width: 108.75px;
   height: 20px;
@@ -71,14 +74,14 @@
   &-enter {
     transform: translateX(120px);
     &-active {
-      transition: transform 1000ms ease;
+      transition: transform 300ms ease;
       transform: translateX(0);
     }
   }
   &-leave {
     transform: translateX(0);
     &-active {
-      transition: transform 1000ms ease;
+      transition: transform 300ms ease;
       transform: translateX(120px);
     }
   }
@@ -87,14 +90,14 @@
   &-enter {
     transform: translateX(-120px);
     &-active {
-      transition: transform 1000ms ease;
+      transition: transform 300ms ease;
       transform: translateX(0);
     }
   }
   &-leave {
     transform: translateX(0);
     &-active {
-      transition: transform 1000ms ease;
+      transition: transform 300ms ease;
       transform: translateX(-120px);
     }
   }

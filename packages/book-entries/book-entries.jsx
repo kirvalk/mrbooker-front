@@ -8,6 +8,7 @@ const { responseStatuses } = require('core/constants');
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 const AddRoom = require('icons/add-room');
 const Filter = require('filter/filter.jsx');
+const Logo = require('icons/logo.jsx');
 
 class BookEntries extends React.Component {
   constructor(props) {
@@ -116,16 +117,21 @@ class BookEntries extends React.Component {
             }
             </ReactCSSTransitionGroup>
         <header className='header'>
-          MR Booker
+          <a href='/' className="logo">
+            <Logo />
+            <span className="logo__text">MR Booker</span>
+          </a>
           <AddRoom showAddForm={this.showAddForm} />
         </header>
         <div className="controls">
           <Filter filterRooms={this.filterRooms} />
         </div>
-          <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'week'} />
-          <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'day'} />
-          <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'day'} />
-          <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'week'} />
+          <div className="calendar-controls">
+            <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'week'} />
+            <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'day'} />
+            <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'day'} />
+            <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'week'} />
+          </div>
           <div className='rooms'>
             <div className="rooms__item rooms__item-header">
               <div className="rooms__cell">

@@ -45,7 +45,7 @@ class AddForm extends React.Component {
     const labels = { projector: 'Проектор', sound: 'Колонки', telephone: 'Телефон' };
     return (
       <form className="add-form" onSubmit={this.handleSubmit}>
-        <div className="add-form__tite">Добавить переговорную в БД</div>
+        <div className="add-form__title">Добавить переговорную в БД</div>
         <TextInput name="name"
                    id="textName"
                    placeholder={placeholders.name}
@@ -67,7 +67,7 @@ class AddForm extends React.Component {
                   id="checkboxTelephone"
                   label={labels.telephone}
                   handleChange={this.handleChange}/>
-        <button type="submit" className="button">Добавить</button>
+        <button type="submit" className="add-form__button">Добавить</button>
       </form>
     );
   }

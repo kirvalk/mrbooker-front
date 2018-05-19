@@ -1,10 +1,12 @@
+@import 'packages/core/vars.scss';
+
 .user-input {
   overflow: hidden;
 
   height: 72px;
   padding: 5px;
 
-  background-color: #b5b5b7;
+  background-color: $color-4;
   &__name {
     font-size: 12px;
   }

@@ -47,8 +47,8 @@ class RoomName extends React.Component {
       <div className="room__info">
         <ReactCSSTransitionGroup
               transitionName="left-slide"
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={1000}>
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={300}>
         {
           !this.state.changeCap
           && <div className='room__cap' onClick={this.startEditCap.bind(this)}>
@@ -61,8 +61,8 @@ class RoomName extends React.Component {
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
               transitionName="right-slide"
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={1000}>
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={300}>
 
         {
           this.state.changeCap
@@ -71,8 +71,8 @@ class RoomName extends React.Component {
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
               transitionName="left-slide"
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={1000}>
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={300}>
         {
           !this.state.changeName
             && <div className='room__name' onClick={this.startEdit.bind(this)}>
@@ -82,13 +82,14 @@ class RoomName extends React.Component {
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
               transitionName="right-slide"
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={1000}>
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={300}>
         {
           this.state.changeName
           && <input autoFocus type="text" onBlur={this.endEdit.bind(this)} className='room__input-name' ref={(input) => { this.nameInput = input; }}/>
         }
         </ReactCSSTransitionGroup>
+
 
       </div>
     );
