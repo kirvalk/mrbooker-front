@@ -106,6 +106,15 @@ class BookEntries extends React.Component {
   render() {
     return (
       <div>
+          <ReactCSSTransitionGroup
+              transitionName="addform-transition"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}>
+            {
+              this.state.isAdding
+              && <AddForm addRoom={this.addRoom} />
+            }
+            </ReactCSSTransitionGroup>
         <header className='header'>
           MR Booker
           <AddRoom showAddForm={this.showAddForm} />
@@ -118,10 +127,6 @@ class BookEntries extends React.Component {
           <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'day'} />
           <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'week'} />
           <div className='rooms'>
-            {
-              this.state.isAdding
-              && <AddForm addRoom={this.addRoom} />
-            }
             <div className="rooms__item rooms__item-header">
               <div className="rooms__cell">
                 <div className="room-t">КОМНАТА</div>
