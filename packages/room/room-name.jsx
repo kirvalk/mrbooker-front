@@ -66,7 +66,7 @@ class RoomName extends React.Component {
 
         {
           this.state.changeCap
-          && <input autoFocus type="text" onBlur={this.endEditCap.bind(this)} className='room__input-cap' ref={(input) => { this.capInput = input; }}/>
+          && <input autoFocus type="text" onBlur={this.endEditCap.bind(this)} className='room__input-cap' ref={(input) => { this.capInput = input; }} defaultValue={this.state.capacity}/>
         }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
@@ -86,7 +86,7 @@ class RoomName extends React.Component {
               transitionLeaveTimeout={300}>
         {
           this.state.changeName
-          && <input autoFocus type="text" onBlur={this.endEdit.bind(this)} className='room__input-name' ref={(input) => { this.nameInput = input; }}/>
+          && <input autoFocus type="text" onBlur={this.endEdit.bind(this)} className='room__input-name' ref={(input) => { this.nameInput = input; }} defaultValue={this.state.name}/>
         }
         </ReactCSSTransitionGroup>
 
