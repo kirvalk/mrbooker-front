@@ -52,6 +52,13 @@ class BookEntries extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const prevMaxCapacity = prevState.maxCapacity;
+    const newMaxCapacity = this.getMaxCapacity(this.state.rooms);
+    if (prevMaxCapacity === newMaxCapacity) return;
+    this.setState({ maxCapacity: newMaxCapacity });
+  }
+
   getMaxCapacity(rooms) {
     const maxCapacity = rooms.reduce((prevMax, room) => {
       return room.capacity > prevMax ? room.capacity : prevMax;
