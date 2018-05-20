@@ -74,8 +74,8 @@ class Filter extends React.Component {
             />
             Телефон
         </label>
-        <div className="filter__elem">
-          <input type="range" min="0" max="80"
+        <div className="filter__elem filter__elem_range">
+          <input type="range" min="0" max={this.props.maxCapacity}
             className="filter__capacity"
             name="capacity"
             defaultValue="0"
