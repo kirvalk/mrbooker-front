@@ -4,11 +4,8 @@ class ProjectorIcon extends React.Component {
   updateRoom() {
     const { id } = this.props.room;
     let { projector } = this.props.room.equipment;
-    if (projector === 1) {
-      projector = 0;
-    } else {
-      projector = 1;
-    }
+    projector = projector === 1 ? 0 : 1;
+
     const newParam = { equipment: { projector } };
     this.props.updateRoom(id, newParam);
   }

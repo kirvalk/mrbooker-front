@@ -2,8 +2,7 @@ const React = require('react');
 
 class DelIcon extends React.Component {
   delRoom() {
-    const { id } = this.props;
-    this.props.deleteRoom(id);
+    this.props.deleteRoom(this.props.id);
   }
 
   render() {

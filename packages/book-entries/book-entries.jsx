@@ -59,10 +59,10 @@ class BookEntries extends React.Component {
     return maxCapacity;
   }
 
-  addRoom(obj) {
+  addRoom(roomParams) {
     const { rooms } = this.state;
 
-    createRequest('addRoom', {}, obj).then((response) => {
+    createRequest('addRoom', {}, roomParams).then((response) => {
       if (response.status === responseStatuses.OK) {
         rooms.push(response.data);
         this.setState({ rooms, isAdding: false });

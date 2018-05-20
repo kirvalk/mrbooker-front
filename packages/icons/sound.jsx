@@ -4,11 +4,8 @@ class SoundIcon extends React.Component {
   updateRoom() {
     const { id } = this.props.room;
     let { sound } = this.props.room.equipment;
-    if (sound === 1) {
-      sound = 0;
-    } else {
-      sound = 1;
-    }
+    sound = sound === 1 ? 0 : 1;
+
     const newParam = { equipment: { sound } };
     this.props.updateRoom(id, newParam);
   }

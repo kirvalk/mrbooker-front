@@ -4,11 +4,8 @@ class TelephoneIcon extends React.Component {
   updateRoom() {
     const { id } = this.props.room;
     let { telephone } = this.props.room.equipment;
-    if (telephone === 1) {
-      telephone = 0;
-    } else {
-      telephone = 1;
-    }
+    telephone = telephone === 1 ? 0 : 1;
+
     const newParam = { equipment: { telephone } };
     this.props.updateRoom(id, newParam);
   }
