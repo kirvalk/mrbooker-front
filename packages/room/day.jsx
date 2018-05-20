@@ -35,7 +35,7 @@ class Day extends React.Component {
   }
 
   hideBookButton() {
-    this.setState({ isHovered: false });
+    this.setState({ isHovered: false, isBooking: false });
   }
 
   render() {
