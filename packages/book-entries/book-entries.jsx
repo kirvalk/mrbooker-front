@@ -22,6 +22,7 @@ class BookEntries extends React.Component {
     this.moveWeek = this.moveWeek.bind(this);
     this.showAddForm = this.showAddForm.bind(this);
     this.filterRooms = this.filterRooms.bind(this);
+    this.goToCurrentWeek = this.goToCurrentWeek.bind(this);
   }
 
   getCurrentDates() {
@@ -31,6 +32,10 @@ class BookEntries extends React.Component {
       currentDates.push(moment(firstDay).add(i, 'd').valueOf());
     }
     return currentDates;
+  }
+
+  goToCurrentWeek() {
+    this.setState({ days: this.getCurrentDates() });
   }
 
   componentDidMount() {
@@ -131,6 +136,7 @@ class BookEntries extends React.Component {
             <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'day'} />
             <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'day'} />
             <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'week'} />
+            <button onClick={this.goToCurrentWeek}>ТЕК НЕДЕЛЯ</button>
           </div>
           <div className='rooms'>
             <div className="rooms__item rooms__item-header">
