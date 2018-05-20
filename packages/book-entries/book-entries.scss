@@ -10,13 +10,18 @@
     position: relative;
 
     height: 100px;
+    margin-bottom: -1px;
  
     &-header {
       height: 50px;
     }
   }
 
-
+  &__today {
+    outline: 3px solid red;
+    outline-offset: -4px;
+  }
+  
   &__cell {
     position: relative;
 
@@ -25,10 +30,15 @@
 
     width: 12.5%;
     height: 100%;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    margin-left: -1px;
 
     vertical-align: top;
 
     border: 1px solid #ddd;
+
+    
 
     &:first-child {
       width: 12.5%;
@@ -103,6 +113,20 @@
 
 .calendar-controls {
   margin: 5px 10px;
+}
+.calendar-controls:after {
+  display: block;
+  clear: both;
+
+  content: '';
+}
+
+.today {
+  float: right;
+
+  color: #1cb0bc;
+
+  font-style: italic;
 }
 
 .addform-transition {

@@ -23,6 +23,7 @@ class BookEntries extends React.Component {
     this.showAddForm = this.showAddForm.bind(this);
     this.filterRooms = this.filterRooms.bind(this);
     this.goToCurrentWeek = this.goToCurrentWeek.bind(this);
+    this.getDayClasses = this.getDayClasses.bind(this);
   }
 
   getCurrentDates() {
@@ -109,6 +110,11 @@ class BookEntries extends React.Component {
     }
   }
 
+  getDayClasses(day) {
+    const today = moment().startOf('day').valueOf();
+    return day === today ? 'rooms__cell rooms__today' : 'rooms__cell';
+  }
+
   render() {
     return (
       <div>
@@ -137,6 +143,7 @@ class BookEntries extends React.Component {
             <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'day'} />
             <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'week'} />
             <button onClick={this.goToCurrentWeek}>ТЕК НЕДЕЛЯ</button>
+            <div className="today">Сегодня {moment().format('DD MMMM YYYY')}, {moment().format('dddd')}</div>
           </div>
           <div className='rooms'>
             <div className="rooms__item rooms__item-header">
@@ -146,7 +153,7 @@ class BookEntries extends React.Component {
               {
                 this.state.days.map((day, index) => {
                   return (
-                    <div className="rooms__cell" key={index}>
+                    <div className={this.getDayClasses(day)} key={index}>
                       <div className="rooms__week-day">
                         {moment(day).format('dddd').toUpperCase()}
                       </div>

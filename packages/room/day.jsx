@@ -63,7 +63,7 @@ class Day extends React.Component {
         {
           this.state.isHovered
           && <div className='day__book' onClick={this.showUserInput}>
-               {Object.keys(this.props.entry).length !== 0 ? 'Снять' : 'Занять'}
+               {Object.keys(this.props.entry).length !== 0 ? 'Снять бронь' : 'Забронировать'}
               </div>
         }
         </ReactCSSTransitionGroup>
