@@ -2,8 +2,6 @@ const React = require('react');
 const TextInput = require('controls/text-input.jsx');
 const Checkbox = require('controls/checkbox.jsx');
 const PropTypes = require('prop-types');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
 
 class AddForm extends React.Component {
   constructor(props) {
@@ -72,5 +70,5 @@ class AddForm extends React.Component {
     );
   }
 }
-AddForm.propTypes = { addRoom: PropTypes.func };
+AddForm.propTypes = { addRoom: PropTypes.func.isRequired };
 module.exports = AddForm;

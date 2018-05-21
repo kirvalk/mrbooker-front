@@ -27,10 +27,10 @@ class Checkbox extends React.Component {
 }
 
 Checkbox.propTypes = {
-  label: PropTypes.string,
-  id: PropTypes.string,
-  handleChange: PropTypes.func,
-  name: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 module.exports = Checkbox;
