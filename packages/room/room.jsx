@@ -13,12 +13,12 @@ class Room extends React.Component {
   constructor(props) {
     super(props);
     this.state = Object.assign(this.props.info, { isHovered: false });
+
     this.getEntries = this.getEntries.bind(this);
     this.bookRoom = this.bookRoom.bind(this);
     this.mouseEnterHandler = this.mouseEnterHandler.bind(this);
     this.mouseLeaveHandler = this.mouseLeaveHandler.bind(this);
   }
-
 
   getEquipmentList() {
     const equip = this.props.info.equipment;
@@ -64,7 +64,10 @@ class Room extends React.Component {
             onMouseEnter={this.mouseEnterHandler}
             onMouseLeave={this.mouseLeaveHandler}>
         <div className="rooms__cell">
-          <RoomName name={this.props.info.name} capacity={this.props.info.capacity} id={this.props.info.id} updateRoom = {this.props.updateRoom} />
+          <RoomName name={this.props.info.name}
+                    capacity={this.props.info.capacity}
+                    id={this.props.info.id}
+                    updateRoom = {this.props.updateRoom} />
           <div className='room__controls'>
             <ProjectorIcon updateRoom={this.props.updateRoom} room={this.props.info} />
             <SoundIcon updateRoom={this.props.updateRoom} room={this.props.info} />
@@ -77,7 +80,10 @@ class Room extends React.Component {
         </div>
         {
           this.props.days
-            .map((day, index) => <Day day={day} key={index} entry={this.getEntries(day)} bookRoom={this.bookRoom} />)
+            .map((day, index) => <Day day={day}
+                                      key={index}
+                                      entry={this.getEntries(day)}
+                                      bookRoom={this.bookRoom} />)
         }
       </div>
     );

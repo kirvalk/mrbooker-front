@@ -51,21 +51,21 @@ class Day extends React.Component {
           {this.state.isBooking && <UserInput bookRoom={this.bookRoom} />}
 
         </ReactCSSTransitionGroup>
-        {
-          this.props.entry.user
-          && <div className='day__user'>{this.props.entry.user}</div>
-        }
+          {
+            this.props.entry.user
+            && <div className='day__user'>{this.props.entry.user}</div>
+          }
         <ReactCSSTransitionGroup
           transitionName="slideup"
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
           >
-        {
-          this.state.isHovered
-          && <div className='day__book' onClick={this.showUserInput}>
-               {Object.keys(this.props.entry).length !== 0 ? 'Снять бронь' : 'Забронировать'}
-              </div>
-        }
+          {
+            this.state.isHovered
+            && <div className='day__book' onClick={this.showUserInput}>
+                {Object.keys(this.props.entry).length !== 0 ? 'Снять бронь' : 'Забронировать'}
+                </div>
+          }
         </ReactCSSTransitionGroup>
       </div>
     );

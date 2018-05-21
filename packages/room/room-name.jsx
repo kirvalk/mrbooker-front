@@ -7,9 +7,14 @@ class RoomName extends React.Component {
   constructor(props) {
     super(props);
     this.state = Object.assign({}, this.props, { changeName: false, changeCap: false });
+
+    this.startEditName = this.startEditName.bind(this);
+    this.endEditName = this.endEditName.bind(this);
+    this.startEditCap = this.startEditCap.bind(this);
+    this.endEditCap = this.endEditCap.bind(this);
   }
 
-  startEdit() {
+  startEditName() {
     this.setState({ changeName: true });
   }
 
@@ -17,7 +22,7 @@ class RoomName extends React.Component {
     this.setState({ changeCap: true });
   }
 
-  endEdit() {
+  endEditName() {
     const { id } = this.props;
     const name = this.nameInput.value;
     if (name === '') {
@@ -41,7 +46,6 @@ class RoomName extends React.Component {
     }
   }
 
-
   render() {
     return (
       <div className="room__info">
@@ -49,52 +53,63 @@ class RoomName extends React.Component {
               transitionName="left-slide"
               transitionEnterTimeout={300}
               transitionLeaveTimeout={300}>
-        {
-          !this.state.changeCap
-          && <div className='room__cap' onClick={this.startEditCap.bind(this)}>
-              <div className="room__cap-number">
-                {this.props.capacity}
+          {
+            !this.state.changeCap
+            && <div className='room__cap' onClick={this.startEditCap}>
+                <div className="room__cap-number">
+                  {this.props.capacity}
+                </div>
+                <CapIcon />
               </div>
-              <CapIcon />
-            </div>
-        }
+          }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
               transitionName="right-slide"
               transitionEnterTimeout={300}
               transitionLeaveTimeout={300}>
 
-        {
-          this.state.changeCap
-          && <input autoFocus type="text" onBlur={this.endEditCap.bind(this)} className='room__input-cap' ref={(input) => { this.capInput = input; }} defaultValue={this.state.capacity}/>
-        }
+          {
+            this.state.changeCap
+            && <input autoFocus type="text"
+                      onBlur={this.endEditCap}
+                      className='room__input-cap'
+                      ref={(input) => { this.capInput = input; }}
+                      defaultValue={this.state.capacity}/>
+          }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
               transitionName="left-slide"
               transitionEnterTimeout={300}
               transitionLeaveTimeout={300}>
-        {
-          !this.state.changeName
-            && <div className='room__name' onClick={this.startEdit.bind(this)}>
-            {this.props.name}
-          </div>
-        }
+          {
+            !this.state.changeName
+              && <div className='room__name' onClick={this.startEditName}>
+              {this.props.name}
+            </div>
+          }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
               transitionName="right-slide"
               transitionEnterTimeout={300}
               transitionLeaveTimeout={300}>
-        {
-          this.state.changeName
-          && <input autoFocus type="text" onBlur={this.endEdit.bind(this)} className='room__input-name' ref={(input) => { this.nameInput = input; }} defaultValue={this.state.name}/>
-        }
+          {
+            this.state.changeName
+            && <input autoFocus type="text"
+                      onBlur={this.endEditName}
+                      className='room__input-name'
+                      ref={(input) => { this.nameInput = input; }}
+                      defaultValue={this.state.name}/>
+          }
         </ReactCSSTransitionGroup>
-
-
       </div>
     );
   }
 }
 
-
+RoomName.propTypes = {
+  id: PropTypes.string.isRequired,
+  updateRoom: PropTypes.func.isRequired,
+  capacity: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+};
 module.exports = RoomName;

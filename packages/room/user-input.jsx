@@ -12,17 +12,18 @@ class UserInput extends React.Component {
     this.props.bookRoom(this.textInput.value);
   }
 
-
   render() {
     return (
       <div className='user-input'>
         <div className='user-input__name'>Как вас зовут?</div>
-        <input className='user-input__input' type="text" ref={(input) => { this.textInput = input; }}/>
+        <input className='user-input__input'
+               type="text"
+               ref={(input) => { this.textInput = input; }}/>
         <button className='user-input__button' onClick={this.bookRoom}>ОК</button>
       </div>
     );
   }
 }
 
-UserInput.propTypes = {};
+UserInput.propTypes = { bookRoom: PropTypes.func.isRequired };
 module.exports = UserInput;
