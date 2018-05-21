@@ -1,9 +1,13 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 
 class AddRoom extends React.Component {
   render() {
     return (
-      <svg className="add-icon" onClick={this.props.showAddForm} viewBox="0 0 66.915 66.915" xmlns="http://www.w3.org/2000/svg">
+      <svg className="add-icon"
+           onClick={this.props.showAddForm}
+           viewBox="0 0 66.915 66.915"
+           xmlns="http://www.w3.org/2000/svg">
         <path d="M49.221,31.5h-14.5V17.881c0-1.104-0.896-2-2-2s-2,0.896-2,2V31.5h-13.5c-1.104,0-2,0.896-2,2s0.896,2,2,2h13.5v14.381
         c0,1.104,0.896,2,2,2s2-0.896,2-2V35.5h14.5c1.104,0,2-0.896,2-2S50.325,31.5,49.221,31.5z"/>
         <path d="M33.457,0C15.009,0,0,15.008,0,33.457s15.009,33.458,33.457,33.458c18.449,0,33.458-15.009,33.458-33.458
@@ -14,5 +18,5 @@ class AddRoom extends React.Component {
   }
 }
 
-
+AddRoom.propTypes = { showAddForm: PropTypes.func.isRequired };
 module.exports = AddRoom;

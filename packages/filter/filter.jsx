@@ -1,5 +1,6 @@
 const React = require('react');
 const moment = require('moment');
+const PropTypes = require('prop-types');
 
 class Filter extends React.Component {
   constructor(props) {
@@ -75,7 +76,9 @@ class Filter extends React.Component {
             Телефон
         </label>
         <div className="filter__elem filter__elem_range">
-          <input type="range" min="0" max={this.props.maxCapacity}
+          <input type="range"
+            min="0"
+            max={this.props.maxCapacity}
             className="filter__capacity"
             name="capacity"
             defaultValue="0"
@@ -94,5 +97,8 @@ class Filter extends React.Component {
     );
   }
 }
-
+Filter.propTypes = {
+  maxCapacity: PropTypes.number.isRequired,
+  filterRooms: PropTypes.func.isRequired,
+};
 module.exports = Filter;

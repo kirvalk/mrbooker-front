@@ -1,6 +1,14 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 
 class SoundIcon extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.updateRoom = this.updateRoom.bind(this);
+    this.getClassName = this.getClassName.bind(this);
+  }
+
   updateRoom() {
     const { id } = this.props.room;
     let { sound } = this.props.room.equipment;
@@ -19,7 +27,10 @@ class SoundIcon extends React.Component {
 
   render() {
     return (
-      <svg className={this.getClassName()} onClick={this.updateRoom.bind(this)} viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <svg className={this.getClassName()}
+           onClick={this.updateRoom}
+           viewBox="0 0 60 60"
+           xmlns="http://www.w3.org/2000/svg">
         <path d="M26.894,7.358c-0.551,0-1.097,0.153-1.579,0.444c-0.046,0.027-0.09,0.059-0.13,0.093L11.634,19.358H1c-0.553,0-1,0.447-1,1
         v19c0,0.266,0.105,0.52,0.293,0.707S0.734,40.358,1,40.358l10.61-0.005l13.543,12.44c0.05,0.046,0.104,0.086,0.161,0.12
         c0.482,0.291,1.028,0.444,1.579,0.444c1.713,0,3.106-1.416,3.106-3.156V10.514C30,8.774,28.606,7.358,26.894,7.358z M13,38.358
@@ -41,5 +52,8 @@ class SoundIcon extends React.Component {
   }
 }
 
-
+SoundIcon.propTypes = {
+  room: PropTypes.object.isRequired,
+  updateRoom: PropTypes.func.isRequired,
+};
 module.exports = SoundIcon;
