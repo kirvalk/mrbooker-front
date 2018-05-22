@@ -16,6 +16,12 @@ class Filter extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.props.maxCapacity < this.state.capacity) {
+      this.setState({ capacity: this.props.maxCapacity });
+    }
+  }
+
   handleSubmit(ev) {
     ev.preventDefault();
     const queryOptions = {};
@@ -81,10 +87,10 @@ class Filter extends React.Component {
             max={this.props.maxCapacity}
             className="filter__capacity"
             name="capacity"
-            defaultValue="0"
-            onChange={this.handleChange} />
+            value={Math.min(this.state.capacity, this.props.maxCapacity)}
+            onChange={this.handleChange}/>
           <div className="filter__capacity_val">
-            {`Вместимость, мин: ${this.state.capacity}`}
+            {`Вместимость, мин: ${Math.min(this.state.capacity, this.props.maxCapacity)}`}
           </div>
         </div>
         <input type="date"

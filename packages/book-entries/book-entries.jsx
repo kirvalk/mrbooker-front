@@ -156,7 +156,7 @@ class BookEntries extends React.Component {
           <AddRoom showAddForm={this.showAddForm} />
         </header>
         <div className="controls">
-          <Filter filterRooms={this.filterRooms} maxCapacity={this.state.maxCapacity} />
+          <Filter filterRooms={this.filterRooms} maxCapacity={this.state.maxCapacity}/>
         </div>
           <div className="calendar-controls">
             <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'week'} />

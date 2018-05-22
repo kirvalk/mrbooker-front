@@ -74,7 +74,7 @@ class RoomName extends React.Component {
                       onBlur={this.endEditCap}
                       className='room__input-cap'
                       ref={(input) => { this.capInput = input; }}
-                      defaultValue={this.state.capacity}/>
+                      defaultValue={this.props.capacity}/>
           }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
