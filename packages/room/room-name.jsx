@@ -26,7 +26,7 @@ class RoomName extends React.Component {
     if (ev.type === 'blur' || (ev.type === 'keydown' && ev.keyCode === 13)) {
       const { id } = this.props;
       const name = this.nameInput.value;
-      if (name === '') {
+      if (name === '' || name === this.nameInput.defaultValue) {
         this.setState({ changeName: false });
       } else {
         const newParams = { name };
@@ -40,7 +40,7 @@ class RoomName extends React.Component {
     if (ev.type === 'blur' || (ev.type === 'keydown' && ev.keyCode === 13)) {
       const { id } = this.props;
       const capacity = Number(this.capInput.value);
-      if (capacity < 2) {
+      if (capacity < 2 || capacity === Number(this.capInput.defaultValue)) {
         this.setState({ changeCap: false });
       } else {
         const newParams = { capacity };
@@ -104,7 +104,7 @@ class RoomName extends React.Component {
                       onKeyDown={this.endEditName}
                       className='room__input-name'
                       ref={(el) => { this.nameInput = el; }}
-                      defaultValue={this.state.name}/>
+                      defaultValue={this.props.name}/>
           }
         </ReactCSSTransitionGroup>
       </div>
