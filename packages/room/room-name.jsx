@@ -22,27 +22,31 @@ class RoomName extends React.Component {
     this.setState({ changeCap: true });
   }
 
-  endEditName() {
-    const { id } = this.props;
-    const name = this.nameInput.value;
-    if (name === '') {
-      this.setState({ changeName: false });
-    } else {
-      const newParams = { name };
-      this.props.updateRoom(id, newParams);
-      this.setState({ changeName: false });
+  endEditName(ev) {
+    if (ev.type === 'blur' || (ev.type === 'keydown' && ev.keyCode === 13)) {
+      const { id } = this.props;
+      const name = this.nameInput.value;
+      if (name === '') {
+        this.setState({ changeName: false });
+      } else {
+        const newParams = { name };
+        this.props.updateRoom(id, newParams);
+        this.setState({ changeName: false });
+      }
     }
   }
 
-  endEditCap() {
-    const { id } = this.props;
-    const capacity = Number(this.capInput.value);
-    if (capacity < 2) {
-      this.setState({ changeCap: false });
-    } else {
-      const newParams = { capacity };
-      this.props.updateRoom(id, newParams);
-      this.setState({ changeCap: false });
+  endEditCap(ev) {
+    if (ev.type === 'blur' || (ev.type === 'keydown' && ev.keyCode === 13)) {
+      const { id } = this.props;
+      const capacity = Number(this.capInput.value);
+      if (capacity < 2) {
+        this.setState({ changeCap: false });
+      } else {
+        const newParams = { capacity };
+        this.props.updateRoom(id, newParams);
+        this.setState({ changeCap: false });
+      }
     }
   }
 
@@ -72,8 +76,9 @@ class RoomName extends React.Component {
             this.state.changeCap
             && <input autoFocus type="text"
                       onBlur={this.endEditCap}
+                      onKeyDown={this.endEditCap}
                       className='room__input-cap'
-                      ref={(input) => { this.capInput = input; }}
+                      ref={(el) => { this.capInput = el; }}
                       defaultValue={this.props.capacity}/>
           }
         </ReactCSSTransitionGroup>
@@ -96,8 +101,9 @@ class RoomName extends React.Component {
             this.state.changeName
             && <input autoFocus type="text"
                       onBlur={this.endEditName}
+                      onKeyDown={this.endEditName}
                       className='room__input-name'
-                      ref={(input) => { this.nameInput = input; }}
+                      ref={(el) => { this.nameInput = el; }}
                       defaultValue={this.state.name}/>
           }
         </ReactCSSTransitionGroup>

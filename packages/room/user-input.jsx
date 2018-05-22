@@ -7,20 +7,21 @@ class UserInput extends React.Component {
     this.bookRoom = this.bookRoom.bind(this);
   }
 
-  bookRoom() {
+  bookRoom(ev) {
+    ev.preventDefault();
     if (this.textInput.value === '') return;
     this.props.bookRoom(this.textInput.value);
   }
 
   render() {
     return (
-      <div className='user-input'>
+      <form className='user-input' onSubmit={this.bookRoom}>
         <div className='user-input__name'>Как вас зовут?</div>
         <input className='user-input__input'
                type="text"
-               ref={(input) => { this.textInput = input; }}/>
-        <button className='user-input__button' onClick={this.bookRoom}>ОК</button>
-      </div>
+               ref={(el) => { this.textInput = el; }}/>
+        <button className='user-input__button' type="submit">ОК</button>
+      </form>
     );
   }
 }
