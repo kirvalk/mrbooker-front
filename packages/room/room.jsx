@@ -31,10 +31,10 @@ class Room extends React.Component {
   }
 
   bookRoom(date, user) {
-    const { reserved } = this.state;
+    const { reserved, id } = this.state;
     const newParams = { date, user };
 
-    createRequest('bookRoom', { id: this.state.id }, newParams).then((response) => {
+    createRequest('bookRoom', { id }, newParams).then((response) => {
       if (response.status === responseStatuses.OK) {
         const alreadyBooked = reserved.find((entry) => {
           return entry.date === newParams.date;
@@ -58,23 +58,24 @@ class Room extends React.Component {
   }
 
   render() {
-    const { id } = this.props.info;
+    const { id, capacity, name } = this.props.info;
+    const { updateRoom, deleteRoom } = this.props;
     return (
       <div className="rooms__item"
             onMouseEnter={this.mouseEnterHandler}
             onMouseLeave={this.mouseLeaveHandler}>
         <div className="rooms__cell">
-          <RoomName name={this.props.info.name}
-                    capacity={this.props.info.capacity}
-                    id={this.props.info.id}
-                    updateRoom = {this.props.updateRoom} />
+          <RoomName name={name}
+                    capacity={capacity}
+                    id={id}
+                    updateRoom = {updateRoom} />
           <div className='room__controls'>
-            <ProjectorIcon updateRoom={this.props.updateRoom} room={this.props.info} />
-            <SoundIcon updateRoom={this.props.updateRoom} room={this.props.info} />
-            <TelephoneIcon updateRoom={this.props.updateRoom} room={this.props.info} />
+            <ProjectorIcon updateRoom={updateRoom} room={this.props.info} />
+            <SoundIcon updateRoom={updateRoom} room={this.props.info} />
+            <TelephoneIcon updateRoom={updateRoom} room={this.props.info} />
             {
               this.state.isHovered
-              && <DelIcon deleteRoom={this.props.deleteRoom} id={id}/>
+              && <DelIcon deleteRoom={deleteRoom} id={id}/>
             }
           </div>
         </div>
@@ -91,9 +92,9 @@ class Room extends React.Component {
 }
 
 Room.propTypes = {
-  deleteRoom: PropTypes.func,
-  info: PropTypes.object,
-  updateRoom: PropTypes.func,
-  days: PropTypes.array,
+  deleteRoom: PropTypes.func.isRequired,
+  info: PropTypes.object.isRequired,
+  updateRoom: PropTypes.func.isRequired,
+  days: PropTypes.array.isRequired,
 };
 module.exports = Room;
