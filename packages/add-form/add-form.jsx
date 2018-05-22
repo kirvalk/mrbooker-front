@@ -24,17 +24,18 @@ class AddForm extends React.Component {
 
   handleSubmit(ev) {
     ev.preventDefault();
-
+    const { name, capacity, projector, sound, telephone } = this.state;
+    const { addRoom } = this.props;
     const newRoom = {
-      name: this.state.name,
-      capacity: Number(this.state.capacity),
+      name,
+      capacity: Number(capacity),
       equipment: {
-        projector: this.state.projector,
-        sound: this.state.sound,
-        telephone: this.state.telephone,
+        projector,
+        sound,
+        telephone,
       },
     };
-    this.props.addRoom(newRoom);
+    addRoom(newRoom);
   }
 
 
@@ -44,31 +45,42 @@ class AddForm extends React.Component {
     return (
       <form className="add-form" onSubmit={this.handleSubmit}>
         <div className="add-form__title">Добавить переговорную в БД</div>
-        <TextInput name="name"
-                   id="textName"
-                   placeholder={placeholders.name}
-                   handleChange={this.handleChange} />
-        <TextInput name="capacity"
-                   id="textCapacity"
-                   placeholder={placeholders.capacity}
-                   handleChange={this.handleChange} />
+        <TextInput
+          name="name"
+          id="textName"
+          placeholder={placeholders.name}
+          handleChange={this.handleChange}
+        />
+        <TextInput
+          name="capacity"
+          id="textCapacity"
+          placeholder={placeholders.capacity}
+          handleChange={this.handleChange}
+        />
         <div className="add-form__equipment">Имеющееся оборудование:</div>
-        <Checkbox name="projector"
-                  id="checkboxProjector"
-                  label={labels.projector}
-                  handleChange={this.handleChange}/>
-        <Checkbox name="sound"
-                  id="checkboxSound"
-                  label={labels.sound}
-                  handleChange={this.handleChange}/>
-        <Checkbox name="telephone"
-                  id="checkboxTelephone"
-                  label={labels.telephone}
-                  handleChange={this.handleChange}/>
+        <Checkbox
+          name="projector"
+          id="checkboxProjector"
+          label={labels.projector}
+          handleChange={this.handleChange}
+        />
+        <Checkbox
+          name="sound"
+          id="checkboxSound"
+          label={labels.sound}
+          handleChange={this.handleChange}
+        />
+        <Checkbox
+          name="telephone"
+          id="checkboxTelephone"
+          label={labels.telephone}
+          handleChange={this.handleChange}
+        />
         <button type="submit" className="add-form__button">Добавить</button>
       </form>
     );
   }
 }
+
 AddForm.propTypes = { addRoom: PropTypes.func.isRequired };
 module.exports = AddForm;

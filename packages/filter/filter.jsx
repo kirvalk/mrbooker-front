@@ -17,22 +17,27 @@ class Filter extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.maxCapacity < this.state.capacity) {
-      this.setState({ capacity: this.props.maxCapacity });
+    const { maxCapacity } = this.props;
+    const capacity = this.state;
+    if (maxCapacity < capacity) {
+      this.setState({ capacity: maxCapacity });
     }
   }
 
   handleSubmit(ev) {
     ev.preventDefault();
+    const { state } = this;
+    const { filterRooms } = this.props;
     const queryOptions = {};
-    Object.keys(this.state).reduce((acc, val) => {
-      if (this.state[val] !== undefined) {
-        Object.assign(queryOptions, { [val]: this.state[val] });
+
+    Object.keys(state).reduce((acc, val) => {
+      if (state[val] !== undefined) {
+        Object.assign(queryOptions, { [val]: state[val] });
       }
       return queryOptions;
     }, queryOptions);
 
-    this.props.filterRooms(queryOptions);
+    filterRooms(queryOptions);
   }
 
   handleChange(ev) {
@@ -51,8 +56,10 @@ class Filter extends React.Component {
   }
 
   render() {
+    const { capacity } = this.state;
+    const { maxCapacity } = this.props;
     return (
-      <form className='filter' onSubmit={this.handleSubmit}>
+      <form className="filter" onSubmit={this.handleSubmit}>
         <div className="filter__description">
           Выберите неообходимое оборудование и вместимость,
           а так же дату, на которую вы хотите забронировать комнату
@@ -62,7 +69,7 @@ class Filter extends React.Component {
             type="checkbox"
             name="projector"
             onChange={this.handleChange}
-            />
+          />
             Проектор
         </label>
         <label className="filter__elem">
@@ -70,7 +77,7 @@ class Filter extends React.Component {
             type="checkbox"
             name="sound"
             onChange={this.handleChange}
-            />
+          />
             Звук
         </label>
         <label className="filter__elem">
@@ -78,27 +85,30 @@ class Filter extends React.Component {
             type="checkbox"
             name="telephone"
             onChange={this.handleChange}
-            />
+          />
             Телефон
         </label>
         <div className="filter__elem filter__elem_range">
-          <input type="range"
+          <input
+            type="range"
             min="0"
-            max={this.props.maxCapacity}
+            max={maxCapacity}
             className="filter__capacity"
             name="capacity"
-            value={Math.min(this.state.capacity, this.props.maxCapacity)}
-            onChange={this.handleChange}/>
+            value={Math.min(capacity, maxCapacity)}
+            onChange={this.handleChange}
+          />
           <div className="filter__capacity_val">
-            {`Вместимость, мин: ${Math.min(this.state.capacity, this.props.maxCapacity)}`}
+            {`Вместимость, мин: ${Math.min(capacity, maxCapacity)}`}
           </div>
         </div>
-        <input type="date"
-          className='filter__date filter__elem'
+        <input
+          type="date"
+          className="filter__date filter__elem"
           name="reserved"
           onChange={this.handleChange}
         />
-        <button type='submit' className="filter__elem">ПРИМЕНИТЬ</button>
+        <button type="submit" className="filter__elem">ПРИМЕНИТЬ</button>
       </form>
     );
   }

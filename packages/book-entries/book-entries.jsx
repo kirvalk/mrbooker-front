@@ -11,6 +11,27 @@ const Filter = require('filter/filter.jsx');
 const Logo = require('icons/logo.jsx');
 
 class BookEntries extends React.Component {
+  static getCurrentDates() {
+    const firstDay = moment().startOf('week').startOf('day');
+    const currentDates = [];
+    for (let i = 0; i < 7; i += 1) {
+      currentDates.push(moment(firstDay).add(i, 'd').valueOf());
+    }
+    return currentDates;
+  }
+
+  static getDayClasses(day) {
+    const today = moment().startOf('day').valueOf();
+    return day === today ? 'rooms__cell rooms__today' : 'rooms__cell';
+  }
+
+  static getMaxCapacity(rooms) {
+    const maxCapacity = rooms.reduce((prevMax, room) => {
+      return room.capacity > prevMax ? room.capacity : prevMax;
+    }, 0);
+    return maxCapacity;
+  }
+
   constructor(props) {
     super(props);
     moment.locale('ru');
@@ -18,7 +39,7 @@ class BookEntries extends React.Component {
     this.state = {
       rooms: [],
       isAdding: false,
-      days: this.getCurrentDates(),
+      days: BookEntries.getCurrentDates(),
       maxCapacity: 0,
     };
     this.addRoom = this.addRoom.bind(this);
@@ -28,43 +49,27 @@ class BookEntries extends React.Component {
     this.showAddForm = this.showAddForm.bind(this);
     this.filterRooms = this.filterRooms.bind(this);
     this.goToCurrentWeek = this.goToCurrentWeek.bind(this);
-    this.getDayClasses = this.getDayClasses.bind(this);
-    this.getMaxCapacity = this.getMaxCapacity.bind(this);
-  }
-
-  getCurrentDates() {
-    const firstDay = moment().startOf('week').startOf('day');
-    const currentDates = [];
-    for (let i = 0; i < 7; i += 1) {
-      currentDates.push(moment(firstDay).add(i, 'd').valueOf());
-    }
-    return currentDates;
-  }
-
-  goToCurrentWeek() {
-    this.setState({ days: this.getCurrentDates() });
   }
 
   componentDidMount() {
     createRequest('fetchRooms').then((response) => {
       const rooms = response.data;
-      this.setState({ rooms: rooms || [], maxCapacity: this.getMaxCapacity(rooms) });
+      this.setState({ rooms: rooms || [], maxCapacity: BookEntries.getMaxCapacity(rooms) });
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { rooms } = this.state;
     const prevMaxCapacity = prevState.maxCapacity;
-    const newMaxCapacity = this.getMaxCapacity(this.state.rooms);
+    const newMaxCapacity = BookEntries.getMaxCapacity(rooms);
     if (prevMaxCapacity === newMaxCapacity) return;
     this.setState({ maxCapacity: newMaxCapacity });
   }
 
-  getMaxCapacity(rooms) {
-    const maxCapacity = rooms.reduce((prevMax, room) => {
-      return room.capacity > prevMax ? room.capacity : prevMax;
-    }, 0);
-    return maxCapacity;
+  goToCurrentWeek() {
+    this.setState({ days: BookEntries.getCurrentDates() });
   }
+
 
   addRoom(roomParams) {
     const { rooms } = this.state;
@@ -78,7 +83,8 @@ class BookEntries extends React.Component {
   }
 
   showAddForm() {
-    this.setState({ isAdding: !this.state.isAdding });
+    const { isAdding } = this.state;
+    this.setState({ isAdding: !isAdding });
   }
 
   deleteRoom(id) {
@@ -120,61 +126,64 @@ class BookEntries extends React.Component {
   }
 
   moveWeek(ev) {
+    const { days } = this.state;
     const { direction } = ev.target.dataset;
     const { step } = ev.target.dataset;
     if (direction === 'prev') {
-      const days = this.state.days.map((day) => moment(day).subtract(1, step).valueOf());
-      this.setState({ days });
+      const newDays = days.map((day) => moment(day).subtract(1, step).valueOf());
+      this.setState({ days: newDays });
     } else if (direction === 'next') {
-      const days = this.state.days.map((day) => moment(day).add(1, step).valueOf());
-      this.setState({ days });
+      const newDays = days.map((day) => moment(day).add(1, step).valueOf());
+      this.setState({ days: newDays });
     }
   }
 
-  getDayClasses(day) {
-    const today = moment().startOf('day').valueOf();
-    return day === today ? 'rooms__cell rooms__today' : 'rooms__cell';
-  }
 
   render() {
+    const { isAdding, maxCapacity, days, rooms } = this.state;
     return (
       <div>
-          <ReactCSSTransitionGroup
-              transitionName="addform-transition"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}>
-            {
-              this.state.isAdding
-              && <AddForm addRoom={this.addRoom} />
-            }
-            </ReactCSSTransitionGroup>
-        <header className='header'>
-          <a href='/' className="logo">
+        <ReactCSSTransitionGroup
+          transitionName="addform-transition"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+        >
+          {
+            isAdding && <AddForm addRoom={this.addRoom} />
+          }
+        </ReactCSSTransitionGroup>
+        <header className="header">
+          <a href="/" className="logo">
             <Logo />
             <span className="logo__text">MR Booker</span>
           </a>
           <AddRoom showAddForm={this.showAddForm} />
         </header>
         <div className="controls">
-          <Filter filterRooms={this.filterRooms} maxCapacity={this.state.maxCapacity}/>
+          <Filter filterRooms={this.filterRooms} maxCapacity={maxCapacity} />
         </div>
-          <div className="calendar-controls">
-            <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'week'} />
-            <DirectionButton moveWeek={this.moveWeek} dir={'prev'} step={'day'} />
-            <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'day'} />
-            <DirectionButton moveWeek={this.moveWeek} dir={'next'} step={'week'} />
-            <button onClick={this.goToCurrentWeek}>ТЕК НЕДЕЛЯ</button>
-            <div className="today">Сегодня {moment().format('DD MMMM YYYY')}, {moment().format('dddd')}</div>
+        <div className="calendar-controls">
+          <DirectionButton moveWeek={this.moveWeek} dir="prev" step="week" />
+          <DirectionButton moveWeek={this.moveWeek} dir="prev" step="day" />
+          <DirectionButton moveWeek={this.moveWeek} dir="next" step="day" />
+          <DirectionButton moveWeek={this.moveWeek} dir="next" step="week" />
+          <button type="button" onClick={this.goToCurrentWeek}>
+            ТЕК НЕДЕЛЯ
+          </button>
+          <div className="today">
+            Сегодня {moment().format('DD MMMM YYYY')}, {moment().format('dddd')}
           </div>
-          <div className='rooms'>
-            <div className="rooms__item rooms__item-header">
-              <div className="rooms__cell">
-                <div className="room-t">КОМНАТА</div>
-              </div>
-              {
-                this.state.days.map((day, index) => {
+        </div>
+        <div className="rooms">
+          <div className="rooms__item rooms__item-header">
+            <div className="rooms__cell">
+              <div className="room-t">КОМНАТА</div>
+            </div>
+            {
+                days.map((day, index) => {
                   return (
-                    <div className={this.getDayClasses(day)} key={index}>
+                    // eslint-disable-next-line react/no-array-index-key
+                    <div className={BookEntries.getDayClasses(day)} key={index}>
                       <div className="rooms__week-day">
                         {moment(day).format('dddd').toUpperCase()}
                       </div>
@@ -185,22 +194,25 @@ class BookEntries extends React.Component {
                   );
                 })
               }
-            </div>
-            <ReactCSSTransitionGroup
-              transitionName="fade"
-              transitionEnterTimeout={300}
-              transitionLeaveTimeout={300}>
-            {
-              this.state.rooms.length > 0
-              && this.state.rooms
-                .map((room) => <Room updateRoom={this.updateRoom}
-                                     deleteRoom={this.deleteRoom}
-                                     days={this.state.days}
-                                     info = {room}
-                                     key={room.id} />)
-            }
-            </ReactCSSTransitionGroup>
           </div>
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            {
+              rooms.length > 0 && rooms.map((room) => (
+                <Room
+                  updateRoom={this.updateRoom}
+                  deleteRoom={this.deleteRoom}
+                  days={days}
+                  info={room}
+                  key={room.id}
+                />
+              ))
+            }
+          </ReactCSSTransitionGroup>
+        </div>
       </div>
     );
   }

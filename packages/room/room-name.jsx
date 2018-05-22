@@ -23,6 +23,7 @@ class RoomName extends React.Component {
   }
 
   endEditName(ev) {
+    const { updateRoom } = this.props;
     if (ev.type === 'blur' || (ev.type === 'keydown' && ev.keyCode === 13)) {
       const { id } = this.props;
       const name = this.nameInput.value;
@@ -30,13 +31,14 @@ class RoomName extends React.Component {
         this.setState({ changeName: false });
       } else {
         const newParams = { name };
-        this.props.updateRoom(id, newParams);
+        updateRoom(id, newParams);
         this.setState({ changeName: false });
       }
     }
   }
 
   endEditCap(ev) {
+    const { updateRoom } = this.props;
     if (ev.type === 'blur' || (ev.type === 'keydown' && ev.keyCode === 13)) {
       const { id } = this.props;
       const capacity = Number(this.capInput.value);
@@ -44,67 +46,83 @@ class RoomName extends React.Component {
         this.setState({ changeCap: false });
       } else {
         const newParams = { capacity };
-        this.props.updateRoom(id, newParams);
+        updateRoom(id, newParams);
         this.setState({ changeCap: false });
       }
     }
   }
 
   render() {
+    const { changeCap, changeName } = this.state;
+    const { capacity, name } = this.props;
     return (
       <div className="room__info">
         <ReactCSSTransitionGroup
-              transitionName="left-slide"
-              transitionEnterTimeout={300}
-              transitionLeaveTimeout={300}>
+          transitionName="left-slide"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
           {
-            !this.state.changeCap
-            && <div className='room__cap' onClick={this.startEditCap}>
-                <div className="room__cap-number">
-                  {this.props.capacity}
-                </div>
-                <CapIcon />
+            !changeCap && (
+            <div className="room__cap" onClick={this.startEditCap}>
+              <div className="room__cap-number">
+                {capacity}
               </div>
+              <CapIcon />
+            </div>
+            )
           }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
-              transitionName="right-slide"
-              transitionEnterTimeout={300}
-              transitionLeaveTimeout={300}>
+          transitionName="right-slide"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
 
           {
-            this.state.changeCap
-            && <input autoFocus type="text"
-                      onBlur={this.endEditCap}
-                      onKeyDown={this.endEditCap}
-                      className='room__input-cap'
-                      ref={(el) => { this.capInput = el; }}
-                      defaultValue={this.props.capacity}/>
+            changeCap && (
+            <input
+              autoFocus
+              type="text"
+              onBlur={this.endEditCap}
+              onKeyDown={this.endEditCap}
+              className="room__input-cap"
+              ref={(el) => { this.capInput = el; }}
+              defaultValue={capacity}
+            />
+            )
           }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
-              transitionName="left-slide"
-              transitionEnterTimeout={300}
-              transitionLeaveTimeout={300}>
+          transitionName="left-slide"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
           {
-            !this.state.changeName
-              && <div className='room__name' onClick={this.startEditName}>
-              {this.props.name}
-            </div>
+            !changeName && (
+              <div className="room__name" onClick={this.startEditName}>
+                {name}
+              </div>
+            )
           }
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
-              transitionName="right-slide"
-              transitionEnterTimeout={300}
-              transitionLeaveTimeout={300}>
+          transitionName="right-slide"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
           {
-            this.state.changeName
-            && <input autoFocus type="text"
-                      onBlur={this.endEditName}
-                      onKeyDown={this.endEditName}
-                      className='room__input-name'
-                      ref={(el) => { this.nameInput = el; }}
-                      defaultValue={this.props.name}/>
+            changeName && (
+            <input
+              autoFocus
+              type="text"
+              onBlur={this.endEditName}
+              onKeyDown={this.endEditName}
+              className="room__input-name"
+              ref={(el) => { this.nameInput = el; }}
+              defaultValue={name}
+            />
+            )
           }
         </ReactCSSTransitionGroup>
       </div>

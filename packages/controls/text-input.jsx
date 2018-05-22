@@ -9,26 +9,29 @@ class TextInput extends React.Component {
 
   sendValue(ev) {
     const { value } = ev.target;
-    const { name } = this.props;
-    this.props.handleChange(name, value);
+    const { name, handleChange } = this.props;
+    handleChange(name, value);
   }
 
   render() {
+    const { id, placeholder } = this.props;
     return (
-      <input type="text"
-              className="text-input"
-              id={this.props.id}
-              placeholder={this.props.placeholder}
-              onChange={this.sendValue}/>
+      <input
+        type="text"
+        className="text-input"
+        id={id}
+        placeholder={placeholder}
+        onChange={this.sendValue}
+      />
     );
   }
 }
 
 TextInput.propTypes = {
-  placeholder: PropTypes.string,
-  id: PropTypes.string,
-  handleChange: PropTypes.func,
-  name: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 module.exports = TextInput;

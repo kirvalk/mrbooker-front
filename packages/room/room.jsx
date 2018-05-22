@@ -12,7 +12,8 @@ const PropTypes = require('prop-types');
 class Room extends React.Component {
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.props.info, { isHovered: false });
+    const { info } = this.props;
+    this.state = Object.assign(info, { isHovered: false });
 
     this.getEntries = this.getEntries.bind(this);
     this.bookRoom = this.bookRoom.bind(this);
@@ -21,12 +22,14 @@ class Room extends React.Component {
   }
 
   getEquipmentList() {
-    const equip = this.props.info.equipment;
+    const { info } = this.props;
+    const equip = info.equipment;
     return Object.values(equip);
   }
 
   getEntries(date) {
-    const entry = this.state.reserved.find((el) => el.date === date);
+    const { reserved } = this.state;
+    const entry = reserved.find((el) => el.date === date);
     return entry || {};
   }
 
@@ -58,33 +61,41 @@ class Room extends React.Component {
   }
 
   render() {
-    const { id, capacity, name } = this.props.info;
-    const { updateRoom, deleteRoom } = this.props;
+    const { info, updateRoom, deleteRoom, days } = this.props;
+    const { id, capacity, name } = info;
+    const { isHovered } = this.state;
     return (
-      <div className="rooms__item"
-            onMouseEnter={this.mouseEnterHandler}
-            onMouseLeave={this.mouseLeaveHandler}>
+      <div
+        className="rooms__item"
+        onMouseEnter={this.mouseEnterHandler}
+        onMouseLeave={this.mouseLeaveHandler}
+      >
         <div className="rooms__cell">
-          <RoomName name={name}
-                    capacity={capacity}
-                    id={id}
-                    updateRoom = {updateRoom} />
-          <div className='room__controls'>
-            <ProjectorIcon updateRoom={updateRoom} room={this.props.info} />
-            <SoundIcon updateRoom={updateRoom} room={this.props.info} />
-            <TelephoneIcon updateRoom={updateRoom} room={this.props.info} />
+          <RoomName
+            name={name}
+            capacity={capacity}
+            id={id}
+            updateRoom={updateRoom}
+          />
+          <div className="room__controls">
+            <ProjectorIcon updateRoom={updateRoom} room={info} />
+            <SoundIcon updateRoom={updateRoom} room={info} />
+            <TelephoneIcon updateRoom={updateRoom} room={info} />
             {
-              this.state.isHovered
-              && <DelIcon deleteRoom={deleteRoom} id={id}/>
+              isHovered
+              && <DelIcon deleteRoom={deleteRoom} id={id} />
             }
           </div>
         </div>
         {
-          this.props.days
-            .map((day, index) => <Day day={day}
-                                      key={index}
-                                      entry={this.getEntries(day)}
-                                      bookRoom={this.bookRoom} />)
+          days.map((day, index) => (
+            <Day
+              day={day}
+              key={index}
+              entry={this.getEntries(day)}
+              bookRoom={this.bookRoom}
+            />
+          ))
         }
       </div>
     );

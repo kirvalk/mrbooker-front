@@ -8,19 +8,23 @@ class Checkbox extends React.Component {
   }
 
   sendValue(ev) {
+    const { handleChange } = this.props;
     const value = Number(ev.target.checked);
     const { name } = this.props;
-    this.props.handleChange(name, value);
+    handleChange(name, value);
   }
 
   render() {
+    const { id, label } = this.props;
     return (
       <div>
-        <input type="checkbox"
-               className="checkbox"
-               id={this.props.id}
-               onChange={this.sendValue}/>
-        <label htmlFor={this.props.id}>{this.props.label}</label>
+        <input
+          type="checkbox"
+          className="checkbox"
+          id={id}
+          onChange={this.sendValue}
+        />
+        <label htmlFor={id}>{label}</label>
       </div>
     );
   }

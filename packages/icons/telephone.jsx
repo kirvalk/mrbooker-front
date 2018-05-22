@@ -9,33 +9,38 @@ class TelephoneIcon extends React.Component {
     this.getClassName = this.getClassName.bind(this);
   }
 
-  updateRoom() {
-    const { id } = this.props.room;
-    let { telephone } = this.props.room.equipment;
-    telephone = telephone === 1 ? 0 : 1;
-
-    const newParam = { equipment: { telephone } };
-    this.props.updateRoom(id, newParam);
-  }
-
   getClassName() {
-    if (this.props.room.equipment.telephone === 1) {
+    const { room } = this.props;
+    if (room.equipment.telephone === 1) {
       return 'telephone-icon telephone-icon_active';
     }
     return 'telephone-icon';
   }
 
+  updateRoom() {
+    const { room, updateRoom } = this.props;
+    const { id } = room;
+    let { telephone } = room.equipment;
+    telephone = telephone === 1 ? 0 : 1;
+
+    const newParam = { equipment: { telephone } };
+    updateRoom(id, newParam);
+  }
+
   render() {
     return (
-      <svg className={this.getClassName()}
-           onClick={this.updateRoom}
-           viewBox="0 0 503.596 503.596"
-           xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className={this.getClassName()}
+        onClick={this.updateRoom}
+        viewBox="0 0 503.596 503.596"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path d="M184.908,120.562V68.718c0-18.368-14.664-31.34-33.032-31.34H96.568c-18.368,0-33.624,12.972-33.624,31.34v51.84
         c0,8.416,3.472,16.512,9.508,22.808c1.4,1.46,2.268,3.412,2.268,5.436l0.092,142.972c0,2.036-0.948,3.992-2.364,5.456
         c-6.02,6.268-9.508,14.36-9.508,22.776v51.852c0,18.368,15.32,35.336,33.684,35.336h55.312c18.368,0,32.968-16.968,32.968-35.336
         v-51.844c0-8.48-3.196-16.616-9.312-22.912c-1.428-1.464-2.148-3.432-2.148-5.48l-0.012-142.648c0-2.044,0.684-4.012,2.1-5.48
-        C181.656,137.182,184.908,129.038,184.908,120.562z"/>
+        C181.656,137.182,184.908,129.038,184.908,120.562z"
+        />
         <path d="M467.784,88.522H200.652v32.04c0,11.508-4,22.56-11.58,31.444l-0.04,136.572c7.58,8.872,11.616,19.916,11.616,31.436
         v51.852c0,27.044-21.668,51.076-48.712,51.076H96.628c-27.04,0-49.42-24.032-49.42-51.076v-51.852
         c0-11.428,4.264-22.404,11.732-31.244l-0.132-136.948c-7.464-8.86-11.596-19.836-11.596-31.26v-32.04h-11.32
@@ -57,7 +62,8 @@ class TelephoneIcon extends React.Component {
         c0-2.172,1.764-3.932,3.936-3.932h51.14c2.18,0,3.936,1.76,3.936,3.932V348.19z M456.376,289.17c0,2.176-1.756,3.932-3.936,3.932
         H401.3c-2.172,0-3.936-1.756-3.936-3.932v-35.408c0-2.172,1.764-3.932,3.936-3.932h51.14c2.18,0,3.936,1.76,3.936,3.932V289.17z
         M456.376,218.354c0,2.172-1.756,3.932-3.936,3.932H251.792c-2.172,0-3.928-1.76-3.928-3.932v-74.752
-        c0-2.172,1.756-3.932,3.928-3.932H452.44c2.18,0,3.936,1.76,3.936,3.932V218.354z"/>
+        c0-2.172,1.756-3.932,3.928-3.932H452.44c2.18,0,3.936,1.76,3.936,3.932V218.354z"
+        />
       </svg>
     );
   }

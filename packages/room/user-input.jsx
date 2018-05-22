@@ -8,19 +8,22 @@ class UserInput extends React.Component {
   }
 
   bookRoom(ev) {
+    const { bookRoom } = this.props;
     ev.preventDefault();
     if (this.textInput.value === '') return;
-    this.props.bookRoom(this.textInput.value);
+    bookRoom(this.textInput.value);
   }
 
   render() {
     return (
-      <form className='user-input' onSubmit={this.bookRoom}>
-        <div className='user-input__name'>Как вас зовут?</div>
-        <input className='user-input__input'
-               type="text"
-               ref={(el) => { this.textInput = el; }}/>
-        <button className='user-input__button' type="submit">ОК</button>
+      <form className="user-input" onSubmit={this.bookRoom}>
+        <div className="user-input__name">Как вас зовут?</div>
+        <input
+          className="user-input__input"
+          type="text"
+          ref={(el) => { this.textInput = el; }}
+        />
+        <button className="user-input__button" type="submit">ОК</button>
       </form>
     );
   }

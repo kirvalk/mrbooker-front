@@ -9,17 +9,18 @@ class DirectionButton extends React.Component {
   }
 
   getButtonName() {
+    const { dir, step } = this.props;
     let name = '';
-    if (this.props.dir === 'prev') {
-      if (this.props.step === 'week') {
+    if (dir === 'prev') {
+      if (step === 'week') {
         name = '<<';
-      } if (this.props.step === 'day') {
+      } if (step === 'day') {
         name = '<';
       }
-    } else if (this.props.dir === 'next') {
-      if (this.props.step === 'week') {
+    } else if (dir === 'next') {
+      if (step === 'week') {
         name = '>>';
-      } if (this.props.step === 'day') {
+      } if (step === 'day') {
         name = '>';
       }
     }
@@ -27,13 +28,16 @@ class DirectionButton extends React.Component {
   }
 
   render() {
+    const { dir, step, moveWeek } = this.props;
     return (
       <button
-        data-direction={this.props.dir}
-        data-step={this.props.step}
-        onClick={this.props.moveWeek}>
+        type="button"
+        data-direction={dir}
+        data-step={step}
+        onClick={moveWeek}
+      >
         {this.getButtonName()}
-        </button>
+      </button>
     );
   }
 }

@@ -7,26 +7,31 @@ class Day extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isBooking: false, isHovered: false };
+
     this.bookRoom = this.bookRoom.bind(this);
     this.showUserInput = this.showUserInput.bind(this);
+    this.showBookButton = this.showBookButton.bind(this);
+    this.hideBookButton = this.hideBookButton.bind(this);
   }
 
   showUserInput() {
-    if (Object.keys(this.props.entry).length === 0) {
-      const isBooking = !this.state.isBooking;
-      this.setState({ isBooking });
+    const { entry } = this.props;
+    const { isBooking } = this.state;
+    if (Object.keys(entry).length === 0) {
+      this.setState({ isBooking: !isBooking });
     } else {
       this.bookRoom();
     }
   }
 
   bookRoom(userName) {
+    const { day, bookRoom } = this.props;
+    const { isBooking } = this.state;
     if (!userName) {
-      this.props.bookRoom(this.props.day);
+      bookRoom(day);
     } else {
-      this.props.bookRoom(this.props.day, userName);
-      const isBooking = !this.state.isBooking;
-      this.setState({ isBooking });
+      bookRoom(day, userName);
+      this.setState({ isBooking: !isBooking });
     }
   }
 
@@ -39,32 +44,38 @@ class Day extends React.Component {
   }
 
   render() {
+    const { isBooking, isHovered } = this.state;
+    const { entry } = this.props;
     return (
-      <div className='rooms__cell day'
-           onMouseEnter={this.showBookButton.bind(this)}
-           onMouseLeave ={this.hideBookButton.bind(this)}>
+      <div
+        className="rooms__cell day"
+        onMouseEnter={this.showBookButton}
+        onMouseLeave={this.hideBookButton}
+      >
         <ReactCSSTransitionGroup
           transitionName="slidedown"
           transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}>
-
-          {this.state.isBooking && <UserInput bookRoom={this.bookRoom} />}
-
-        </ReactCSSTransitionGroup>
+          transitionLeaveTimeout={500}
+        >
           {
-            this.props.entry.user
-            && <div className='day__user'>{this.props.entry.user}</div>
+            isBooking && <UserInput bookRoom={this.bookRoom} />
           }
+        </ReactCSSTransitionGroup>
+        {
+          entry.user
+          && <div className="day__user">{entry.user}</div>
+        }
         <ReactCSSTransitionGroup
           transitionName="slideup"
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
-          >
+        >
           {
-            this.state.isHovered
-            && <div className='day__book' onClick={this.showUserInput}>
-                {Object.keys(this.props.entry).length !== 0 ? 'Снять бронь' : 'Забронировать'}
-                </div>
+            isHovered && (
+            <div className="day__book" onClick={this.showUserInput}>
+              {Object.keys(entry).length !== 0 ? 'Снять бронь' : 'Забронировать'}
+            </div>
+            )
           }
         </ReactCSSTransitionGroup>
       </div>
