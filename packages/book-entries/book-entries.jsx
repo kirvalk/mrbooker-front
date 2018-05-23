@@ -196,9 +196,7 @@ class BookEntries extends React.Component {
         </div>
         <div className="rooms">
           <div className="rooms__item rooms__item-header">
-            <div className="rooms__cell">
-              <div className="room-t">КОМНАТА</div>
-            </div>
+            <div className="rooms__cell" />
             {
               days.map((day, index) => (
                 // eslint-disable-next-line react/no-array-index-key

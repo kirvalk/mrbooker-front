@@ -44,14 +44,10 @@
 
     border: 1px solid #ddd;
 
-    
-
     &:first-child {
       width: 12.5%;
       padding: 4px;
     }
-    
-    
   }
 
   &__week-day {
@@ -62,6 +58,7 @@
     font-size: 14px;
     line-height: 30px;
   }
+
   &__date {
     height: 20px;
 
@@ -86,23 +83,21 @@
     content: '';
   }
 }
-.room-t {
-  text-align: center;
-
-  line-height: 50px;
-}
 
 .fade {
   &-enter {
     opacity: 0;
+
     &-active {
       transition: opacity 300ms ease;
 
       opacity: 1;
     }
   }
+  
   &-leave {
     opacity: 1;
+
     &-active {
       transition: opacity 300ms ease;
 
@@ -119,13 +114,15 @@
 
 .calendar-controls {
   margin: 5px 10px;
-}
-.calendar-controls:after {
-  display: block;
-  clear: both;
+  
+  &:after {
+    display: block;
+    clear: both;
 
-  content: '';
+    content: '';
+  }
 }
+
 
 .today {
   float: right;
@@ -138,13 +135,16 @@
 .addform-transition {
   &-enter {
     transform: translateX(320px);
+
     &-active {
       transition: transform 500ms cubic-bezier(.01,1.31,.99,1.18);
       transform: translateX(0);
     }
   }
+  
   &-leave {
     transform: translateX(0);
+
     &-active {
       transition: transform 300ms linear;
       transform: translateX(320px);

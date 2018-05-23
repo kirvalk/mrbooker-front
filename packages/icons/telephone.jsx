@@ -11,10 +11,8 @@ class TelephoneIcon extends React.Component {
 
   getClassName() {
     const { room } = this.props;
-    if (room.equipment.telephone === 1) {
-      return 'telephone-icon telephone-icon_active';
-    }
-    return 'telephone-icon';
+    const { telephone } = room.equipment;
+    return `telephone-icon ${telephone === 1 ? 'telephone-icon_active' : ''}`;
   }
 
   updateRoom() {

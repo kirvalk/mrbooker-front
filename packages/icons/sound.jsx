@@ -11,10 +11,8 @@ class SoundIcon extends React.Component {
 
   getClassName() {
     const { room } = this.props;
-    if (room.equipment.sound === 1) {
-      return 'sound-icon sound-icon_active';
-    }
-    return 'sound-icon';
+    const { sound } = room.equipment;
+    return `sound-icon ${sound === 1 ? 'sound-icon_active' : ''}`;
   }
 
   updateRoom() {

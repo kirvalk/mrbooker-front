@@ -23,6 +23,7 @@
     font-size: 14px;
     line-height: 25px;
   }
+
   &__user {
     height: 45px;
     margin-top: 10px;
@@ -36,6 +37,7 @@
 .slideup {
   &-enter {
     height: 0;
+
     &-active {
       height: 25px;
 
@@ -44,6 +46,7 @@
   }
   &-leave {
     height: 25px;
+    
     &-active {
       height: 0;
 

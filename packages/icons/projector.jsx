@@ -11,10 +11,8 @@ class ProjectorIcon extends React.Component {
 
   getClassName() {
     const { room } = this.props;
-    if (room.equipment.projector === 1) {
-      return 'projector-icon projector-icon_active';
-    }
-    return 'projector-icon';
+    const { projector } = room.equipment;
+    return `projector-icon ${projector === 1 ? 'projector-icon_active' : ''}`;
   }
 
   updateRoom() {
