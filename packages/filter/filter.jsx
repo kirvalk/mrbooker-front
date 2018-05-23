@@ -36,7 +36,9 @@ class Filter extends React.Component {
       }
       return queryOptions;
     }, queryOptions);
-
+    if (state.capacity > this.props.maxCapacity) {
+      queryOptions.capacity = this.props.maxCapacity;
+    }
     filterRooms(queryOptions);
   }
 
