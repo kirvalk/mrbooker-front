@@ -27,7 +27,7 @@ class Filter extends React.Component {
   handleSubmit(ev) {
     ev.preventDefault();
     const { state } = this;
-    const { filterRooms } = this.props;
+    const { filterRooms, maxCapacity } = this.props;
     const queryOptions = {};
 
     Object.keys(state).reduce((acc, val) => {
@@ -36,8 +36,8 @@ class Filter extends React.Component {
       }
       return queryOptions;
     }, queryOptions);
-    if (state.capacity > this.props.maxCapacity) {
-      queryOptions.capacity = this.props.maxCapacity;
+    if (state.capacity > maxCapacity) {
+      queryOptions.capacity = maxCapacity;
     }
     filterRooms(queryOptions);
   }
