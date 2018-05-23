@@ -9,6 +9,7 @@ const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 const AddRoom = require('icons/add-room');
 const Filter = require('filter/filter.jsx');
 const Logo = require('icons/logo.jsx');
+const PropTypes = require('prop-types');
 
 class BookEntries extends React.Component {
   static getCurrentDates() {
@@ -52,9 +53,12 @@ class BookEntries extends React.Component {
   }
 
   componentDidMount() {
+    const { changeLoadingStatus } = this.props;
+    changeLoadingStatus(true);
     createRequest('fetchRooms').then((response) => {
       const rooms = response.data;
       this.setState({ rooms: rooms || [], maxCapacity: BookEntries.getMaxCapacity(rooms) });
+      changeLoadingStatus(false);
     });
   }
 
@@ -73,11 +77,14 @@ class BookEntries extends React.Component {
 
   addRoom(roomParams) {
     const { rooms } = this.state;
+    const { changeLoadingStatus } = this.props;
+    changeLoadingStatus(true);
 
     createRequest('addRoom', {}, roomParams).then((response) => {
       if (response.status === responseStatuses.OK) {
         rooms.push(response.data);
         this.setState({ rooms, isAdding: false });
+        changeLoadingStatus(false);
       }
     });
   }
@@ -89,17 +96,24 @@ class BookEntries extends React.Component {
 
   deleteRoom(id) {
     const { rooms } = this.state;
+    const { changeLoadingStatus } = this.props;
+    changeLoadingStatus(true);
+
     const indexToDelete = rooms.findIndex((room) => room.id === id);
     createRequest('deleteRoom', { id }).then((response) => {
       if (response.status === responseStatuses.OK) {
         rooms.splice(indexToDelete, 1);
         this.setState({ rooms });
       }
+      changeLoadingStatus(false);
     });
   }
 
   updateRoom(id, newParams) {
     const { rooms } = this.state;
+    const { changeLoadingStatus } = this.props;
+    changeLoadingStatus(true);
+
     const roomToUpdate = rooms.find((room) => room.id === id);
     createRequest('updateRoom', { id }, newParams).then((response) => {
       if (response.status === responseStatuses.OK) {
@@ -114,14 +128,19 @@ class BookEntries extends React.Component {
 
         this.setState({ rooms });
       }
+      changeLoadingStatus(false);
     });
   }
 
   filterRooms(queryOptions) {
+    const { changeLoadingStatus } = this.props;
+    changeLoadingStatus(true);
+
     createRequest('fetchRooms', queryOptions).then((response) => {
       if (response.status === responseStatuses.OK) {
         this.setState({ rooms: response.data || [] });
       }
+      changeLoadingStatus(false);
     });
   }
 
@@ -141,6 +160,7 @@ class BookEntries extends React.Component {
 
   render() {
     const { isAdding, maxCapacity, days, rooms } = this.state;
+    const { changeLoadingStatus } = this.props;
     return (
       <div>
         <ReactCSSTransitionGroup
@@ -205,6 +225,7 @@ class BookEntries extends React.Component {
                 <Room
                   updateRoom={this.updateRoom}
                   deleteRoom={this.deleteRoom}
+                  changeLoadingStatus={changeLoadingStatus}
                   days={days}
                   info={room}
                   key={room.id}
@@ -218,5 +239,5 @@ class BookEntries extends React.Component {
   }
 }
 
-
+BookEntries.propTypes = { changeLoadingStatus: PropTypes.func.isRequired };
 module.exports = BookEntries;

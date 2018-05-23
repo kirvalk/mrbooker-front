@@ -1,10 +1,16 @@
 @import 'packages/core/vars.scss';
+@import 'packages/preloader/preloader';
+
 
 .rooms {
   position: relative;
 
   width: 950px;
   margin: 0 auto;
+  
+  &__loading {
+    @extend %block-preloader;
+  }
 
   &__item {
     position: relative;

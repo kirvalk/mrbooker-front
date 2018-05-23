@@ -36,6 +36,8 @@ class Room extends React.Component {
   bookRoom(date, user) {
     const { reserved, id } = this.state;
     const newParams = { date, user };
+    const { changeLoadingStatus } = this.props;
+    changeLoadingStatus(true);
 
     createRequest('bookRoom', { id }, newParams).then((response) => {
       if (response.status === responseStatuses.OK) {
@@ -49,6 +51,7 @@ class Room extends React.Component {
         }
         this.setState({ reserved });
       }
+      changeLoadingStatus(false);
     });
   }
 
@@ -107,5 +110,6 @@ Room.propTypes = {
   info: PropTypes.object.isRequired,
   updateRoom: PropTypes.func.isRequired,
   days: PropTypes.array.isRequired,
+  changeLoadingStatus: PropTypes.func.isRequired,
 };
 module.exports = Room;
