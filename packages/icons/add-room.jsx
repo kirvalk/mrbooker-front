@@ -2,11 +2,11 @@ const React = require('react');
 const PropTypes = require('prop-types');
 
 const AddRoom = (props) => {
-  const { showAddForm } = props;
+  const { toggleAddForm } = props;
   return (
     <svg
       className="add-icon"
-      onClick={showAddForm}
+      onClick={toggleAddForm}
       viewBox="0 0 66.915 66.915"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -21,5 +21,5 @@ const AddRoom = (props) => {
   );
 };
 
-AddRoom.propTypes = { showAddForm: PropTypes.func.isRequired };
+AddRoom.propTypes = { toggleAddForm: PropTypes.func.isRequired };
 module.exports = AddRoom;

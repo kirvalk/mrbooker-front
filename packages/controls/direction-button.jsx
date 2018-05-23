@@ -1,5 +1,6 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const DirConfig = require('../core/direction-config');
 
 class DirectionButton extends React.Component {
   constructor(props) {
@@ -10,21 +11,7 @@ class DirectionButton extends React.Component {
 
   getButtonName() {
     const { dir, step } = this.props;
-    let name = '';
-    if (dir === 'prev') {
-      if (step === 'week') {
-        name = '<<';
-      } if (step === 'day') {
-        name = '<';
-      }
-    } else if (dir === 'next') {
-      if (step === 'week') {
-        name = '>>';
-      } if (step === 'day') {
-        name = '>';
-      }
-    }
-    return name;
+    return DirConfig[dir][step];
   }
 
   render() {

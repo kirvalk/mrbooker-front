@@ -47,7 +47,7 @@ class BookEntries extends React.Component {
     this.deleteRoom = this.deleteRoom.bind(this);
     this.updateRoom = this.updateRoom.bind(this);
     this.moveWeek = this.moveWeek.bind(this);
-    this.showAddForm = this.showAddForm.bind(this);
+    this.toggleAddForm = this.toggleAddForm.bind(this);
     this.filterRooms = this.filterRooms.bind(this);
     this.goToCurrentWeek = this.goToCurrentWeek.bind(this);
   }
@@ -89,7 +89,7 @@ class BookEntries extends React.Component {
     });
   }
 
-  showAddForm() {
+  toggleAddForm() {
     const { isAdding } = this.state;
     this.setState({ isAdding: !isAdding });
   }
@@ -177,7 +177,7 @@ class BookEntries extends React.Component {
             <Logo />
             <span className="logo__text">MR Booker</span>
           </a>
-          <AddRoom showAddForm={this.showAddForm} />
+          <AddRoom toggleAddForm={this.toggleAddForm} />
         </header>
         <div className="controls">
           <Filter filterRooms={this.filterRooms} maxCapacity={maxCapacity} />
@@ -200,19 +200,17 @@ class BookEntries extends React.Component {
               <div className="room-t">КОМНАТА</div>
             </div>
             {
-                days.map((day, index) => {
-                  return (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <div className={BookEntries.getDayClasses(day)} key={index}>
-                      <div className="rooms__week-day">
-                        {moment(day).format('dddd').toUpperCase()}
-                      </div>
-                      <div className="rooms__date">
-                        {moment(day).format('DD MMMM YY')}
-                      </div>
-                    </div>
-                  );
-                })
+              days.map((day, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div className={BookEntries.getDayClasses(day)} key={index}>
+                  <div className="rooms__week-day">
+                    {moment(day).format('dddd').toUpperCase()}
+                  </div>
+                  <div className="rooms__date">
+                    {moment(day).format('DD MMMM YY')}
+                  </div>
+                </div>
+              ))
               }
           </div>
           <ReactCSSTransitionGroup
