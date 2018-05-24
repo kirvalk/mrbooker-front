@@ -1,5 +1,3 @@
-@import 'packages/core/vars.scss';
-
 .add-icon {
   float: right;
 
@@ -9,7 +7,7 @@
   cursor: pointer;
   transition: transform 300ms ease;
 
-  fill: $color-3;
+  fill: rgba(255,255,255,0.75);
   
   &:hover {
     transition: transform 300ms ease;
