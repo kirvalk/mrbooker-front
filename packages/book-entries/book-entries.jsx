@@ -177,7 +177,7 @@ class BookEntries extends React.Component {
             <Logo />
             <span className="logo__text">MR Booker</span>
           </a>
-          <AddRoom toggleAddForm={this.toggleAddForm} />
+          <AddRoom toggleAddForm={this.toggleAddForm} isAdding={isAdding} />
         </header>
         <div className="controls">
           <Filter filterRooms={this.filterRooms} maxCapacity={maxCapacity} />

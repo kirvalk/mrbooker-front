@@ -7,7 +7,25 @@
   height: 50px;
 
   cursor: pointer;
+  transition: transform 300ms ease;
 
   fill: $color-3;
+  
+  &:hover {
+    transition: transform 300ms ease;
+    transform: scale(1.05);
+  }
+
+  &_active {
+    transition: transform 300ms ease;
+    transform: rotateZ(45deg);
+
+    fill: rgba(255,0,0,0.75);;
+    
+    &:hover {
+      transition: transform 300ms ease;
+      transform: scale(1.05) rotateZ(45deg);
+    }
+  }
   
 }
