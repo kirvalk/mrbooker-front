@@ -19,11 +19,11 @@ class UserInput extends React.Component {
       <form className="user-input" onSubmit={this.bookRoom}>
         <div className="user-input__name">Как вас зовут?</div>
         <input
-          className="user-input__input"
+          className="user-input__input input"
           type="text"
           ref={(el) => { this.textInput = el; }}
         />
-        <button className="user-input__button" type="submit">ОК</button>
+        <button className="user-input__button btn" type="submit">ОК</button>
       </form>
     );
   }

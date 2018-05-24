@@ -14,10 +14,10 @@
 @import 'packages/room/user-input.scss';
 @import 'packages/filter/filter.scss';
 @import 'packages/preloader/preloader';
+@import 'packages/controls/direction-button.scss';
 
 
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
-@import url('https://fonts.googleapis.com/css?family=Atma');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Neucha');
 
 html,
 body {
@@ -26,12 +26,12 @@ body {
 
   background: #ebebeb;
 
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Fira Sans', Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
 
-input:focus, a:focus {
+input:focus, a:focus, button:focus {
 	outline:none;
 }
 

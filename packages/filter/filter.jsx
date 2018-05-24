@@ -106,11 +106,11 @@ class Filter extends React.Component {
         </div>
         <input
           type="date"
-          className="filter__date filter__elem"
+          className="filter__date filter__elem input"
           name="reserved"
           onChange={this.handleChange}
         />
-        <button type="submit" className="filter__elem">ПРИМЕНИТЬ</button>
+        <button type="submit" className="filter__elem btn">ПРИМЕНИТЬ</button>
       </form>
     );
   }

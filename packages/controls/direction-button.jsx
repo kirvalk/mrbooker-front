@@ -18,6 +18,7 @@ class DirectionButton extends React.Component {
     const { dir, step, moveWeek } = this.props;
     return (
       <button
+        className="btn"
         type="button"
         data-direction={dir}
         data-step={step}

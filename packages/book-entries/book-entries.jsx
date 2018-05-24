@@ -84,8 +84,8 @@ class BookEntries extends React.Component {
       if (response.status === responseStatuses.OK) {
         rooms.push(response.data);
         this.setState({ rooms, isAdding: false });
-        changeLoadingStatus(false);
       }
+      changeLoadingStatus(false);
     });
   }
 
@@ -183,13 +183,15 @@ class BookEntries extends React.Component {
           <Filter filterRooms={this.filterRooms} maxCapacity={maxCapacity} />
         </div>
         <div className="calendar-controls">
-          <DirectionButton moveWeek={this.moveWeek} dir="prev" step="week" />
-          <DirectionButton moveWeek={this.moveWeek} dir="prev" step="day" />
-          <DirectionButton moveWeek={this.moveWeek} dir="next" step="day" />
-          <DirectionButton moveWeek={this.moveWeek} dir="next" step="week" />
-          <button type="button" onClick={this.goToCurrentWeek}>
-            ТЕК НЕДЕЛЯ
-          </button>
+          <div className="btn-group">
+            <DirectionButton moveWeek={this.moveWeek} dir="prev" step="week" />
+            <DirectionButton moveWeek={this.moveWeek} dir="prev" step="day" />
+            <DirectionButton moveWeek={this.moveWeek} dir="next" step="day" />
+            <DirectionButton moveWeek={this.moveWeek} dir="next" step="week" />
+            <button type="button" className="btn" onClick={this.goToCurrentWeek}>
+              ТЕК НЕДЕЛЯ
+            </button>
+          </div>
           <div className="today">
             Сегодня {moment().format('DD MMMM YYYY')}, {moment().format('dddd')}
           </div>

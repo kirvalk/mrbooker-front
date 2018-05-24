@@ -86,7 +86,7 @@ class RoomName extends React.Component {
               type="text"
               onBlur={this.endEditCap}
               onKeyDown={this.endEditCap}
-              className="room__input-cap"
+              className="room__input-cap input"
               ref={(el) => { this.capInput = el; }}
               defaultValue={capacity}
             />
@@ -118,7 +118,7 @@ class RoomName extends React.Component {
               type="text"
               onBlur={this.endEditName}
               onKeyDown={this.endEditName}
-              className="room__input-name"
+              className="room__input-name input"
               ref={(el) => { this.nameInput = el; }}
               defaultValue={name}
             />

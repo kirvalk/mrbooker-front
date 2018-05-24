@@ -14,7 +14,9 @@
 
     cursor: pointer;
 
-    background-color: $color-1;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #0366d6;
   }
 
   &__info {
@@ -57,9 +59,6 @@
     width: 108.75px;
     height: 20px;
     padding: 0 5px;
-
-    border: 1px solid gray;
-    border-radius: 4px;
   }
   
   &__input-cap {
@@ -69,10 +68,6 @@
     width: 108.75px;
     height: 20px;
     padding: 0 5px;
-
-    border: 1px solid gray;
-    border-radius: 4px;
-    
   }
 }
 

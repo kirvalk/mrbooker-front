@@ -76,7 +76,7 @@ class AddForm extends React.Component {
           label={labels.telephone}
           handleChange={this.handleChange}
         />
-        <button type="submit" className="add-form__button">Добавить</button>
+        <button type="submit" className="add-form__button btn">Добавить</button>
       </form>
     );
   }

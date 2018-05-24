@@ -18,7 +18,7 @@ class TextInput extends React.Component {
     return (
       <input
         type="text"
-        className="text-input"
+        className="text-input input"
         id={id}
         placeholder={placeholder}
         onChange={this.sendValue}
