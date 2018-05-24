@@ -41,6 +41,8 @@
   }
 
   &__user {
+    position: relative;
+
     overflow: hidden;
 
     height: 60px;
@@ -52,7 +54,39 @@
 
     font-family: 'Neucha', cursive;
     font-size: 20px;
+
+    &:after {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+
+      display: block;
+
+      width: 5px;
+      height: 5px;
+
+      content:'';
+
+      border-radius: 50%;
+      background-color: rgb(36, 41, 46);
     }
+
+    &:before {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+
+      display: block;
+
+      width: 5px;
+      height: 5px;
+
+      content:'';
+
+      border-radius: 50%;
+      background-color: rgb(36, 41, 46);
+    }
+  }
 }
 
 .slideup {
