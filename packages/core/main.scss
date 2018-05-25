@@ -1,5 +1,23 @@
 @import 'packages/book-entries/book-entries.scss';
-@import 'packages/inputs/text-input.scss';
+@import 'packages/controls/text-input.scss';
+@import 'packages/room/room.scss';
+@import 'packages/add-form/add-form.scss';
+@import 'packages/room/day.scss';
+@import 'packages/icons/delete.scss';
+@import 'packages/icons/capacity.scss';
+@import 'packages/icons/projector.scss';
+@import 'packages/icons/sound.scss';
+@import 'packages/icons/telephone.scss';
+@import 'packages/icons/logo.scss';
+@import 'packages/icons/add-room.scss';
+@import 'packages/room/room-name.scss';
+@import 'packages/room/user-input.scss';
+@import 'packages/filter/filter.scss';
+@import 'packages/preloader/preloader';
+@import 'packages/controls/direction-button.scss';
+
+
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Neucha');
 
 html,
 body {
@@ -7,9 +25,48 @@ body {
   padding: 0;
 
   background: #ebebeb;
+
+  font-family: 'Fira Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+input:focus, a:focus, button:focus {
+	outline:none;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 ul, li {
   margin: 0;
   padding: 0;
 }
+
+
+.main {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 1000px;
+  min-height: 360px;
+  margin: 0 auto;
+  padding: 15px;
+
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+  
+  &:after {
+    display: block;
+    clear: both;
+
+    content:'';
+  }
+
+  &__loading {
+    @extend %block-preloader;
+  }
+}
+

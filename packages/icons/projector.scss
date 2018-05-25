@@ -1,0 +1,13 @@
+.projector-icon {
+  width: 26px;
+  height: 26px;
+
+  cursor: pointer;
+
+  fill: #A8AAAA;
+  
+  &_active {
+    fill: #28a745;
+  }
+  
+}

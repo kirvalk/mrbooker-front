@@ -1,0 +1,16 @@
+.del-icon {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+
+  width: 15px;
+  height: 15px;
+
+  cursor: pointer;
+
+  fill: #A8AAAA;
+  
+  &:hover {
+    fill: #24292e;;
+  }
+}

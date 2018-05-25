@@ -1,0 +1,23 @@
+.add-form {
+  position: absolute;
+  z-index: 10;
+  top: 80px;
+  right: 35px;
+
+  width: 300px;
+  padding: 15px;
+
+  color: #24292e;
+  border: 1px solid #e1e4e8;
+  border-radius: 5px;
+  background-color: #fafbfc;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+  &__title, &__equipment {
+    margin-bottom: 5px;
+  }
+
+  &__button {
+    margin-top: 5px;
+  }
+}
