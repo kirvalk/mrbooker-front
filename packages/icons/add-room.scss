@@ -14,7 +14,7 @@
     transform: scale(1.05);
   }
 
-  &_active {
+  &__active {
     transition: transform 300ms ease;
     transform: rotateZ(45deg);
 

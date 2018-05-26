@@ -1,18 +1,12 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const className = require('class-name/class-name');
 
 class ProjectorIcon extends React.Component {
   constructor(props) {
     super(props);
 
     this.updateRoom = this.updateRoom.bind(this);
-    this.getClassName = this.getClassName.bind(this);
-  }
-
-  getClassName() {
-    const { room } = this.props;
-    const { projector } = room.equipment;
-    return `projector-icon ${projector === 1 ? 'projector-icon_active' : ''}`;
   }
 
   updateRoom() {
@@ -26,9 +20,11 @@ class ProjectorIcon extends React.Component {
   }
 
   render() {
+    const { room } = this.props;
+    const { projector } = room.equipment;
     return (
       <svg
-        className={this.getClassName()}
+        className={className({ name: 'projector-icon', mods: { active: projector === 1 } })}
         onClick={this.updateRoom}
         viewBox="0 0 297 297"
         xmlns="http://www.w3.org/2000/svg"

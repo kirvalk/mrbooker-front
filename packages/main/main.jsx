@@ -1,18 +1,13 @@
 const React = require('react');
 const BookEntries = require('book-entries/book-entries.jsx');
+const className = require('class-name/class-name');
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: false };
 
-    this.getClass = this.getClass.bind(this);
     this.changeLoadingStatus = this.changeLoadingStatus.bind(this);
-  }
-
-  getClass() {
-    const { isLoading } = this.state;
-    return isLoading ? 'main main__loading' : 'main';
   }
 
   changeLoadingStatus(bool) {
@@ -20,8 +15,9 @@ class Main extends React.Component {
   }
 
   render() {
+    const { isLoading } = this.state;
     return (
-      <div className={this.getClass()}>
+      <div className={className({ name: 'main', mods: { loading: isLoading } })}>
         <BookEntries changeLoadingStatus={this.changeLoadingStatus} />
       </div>
     );

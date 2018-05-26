@@ -1,4 +1,5 @@
 const React = require('react');
+const className = require('class-name/class-name');
 const PropTypes = require('prop-types');
 
 class SoundIcon extends React.Component {
@@ -6,13 +7,6 @@ class SoundIcon extends React.Component {
     super(props);
 
     this.updateRoom = this.updateRoom.bind(this);
-    this.getClassName = this.getClassName.bind(this);
-  }
-
-  getClassName() {
-    const { room } = this.props;
-    const { sound } = room.equipment;
-    return `sound-icon ${sound === 1 ? 'sound-icon_active' : ''}`;
   }
 
   updateRoom() {
@@ -26,9 +20,11 @@ class SoundIcon extends React.Component {
   }
 
   render() {
+    const { room } = this.props;
+    const { sound } = room.equipment;
     return (
       <svg
-        className={this.getClassName()}
+        className={className({ name: 'sound-icon', mods: { active: sound === 1 } })}
         onClick={this.updateRoom}
         viewBox="0 0 60 60"
         xmlns="http://www.w3.org/2000/svg"

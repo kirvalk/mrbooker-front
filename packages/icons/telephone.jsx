@@ -1,18 +1,12 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const className = require('class-name/class-name');
 
 class TelephoneIcon extends React.Component {
   constructor(props) {
     super(props);
 
     this.updateRoom = this.updateRoom.bind(this);
-    this.getClassName = this.getClassName.bind(this);
-  }
-
-  getClassName() {
-    const { room } = this.props;
-    const { telephone } = room.equipment;
-    return `telephone-icon ${telephone === 1 ? 'telephone-icon_active' : ''}`;
   }
 
   updateRoom() {
@@ -26,9 +20,11 @@ class TelephoneIcon extends React.Component {
   }
 
   render() {
+    const { room } = this.props;
+    const { telephone } = room.equipment;
     return (
       <svg
-        className={this.getClassName()}
+        className={className({ name: 'telephone-icon', mods: { active: telephone === 1 } })}
         onClick={this.updateRoom}
         viewBox="0 0 503.596 503.596"
         xmlns="http://www.w3.org/2000/svg"
