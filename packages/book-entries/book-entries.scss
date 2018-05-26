@@ -23,11 +23,6 @@
     }
   }
 
-  &__today {
-    outline: 3px solid red;
-    outline-offset: -4px;
-  }
-  
   &__cell {
     position: relative;
 
@@ -47,6 +42,11 @@
     &:first-child {
       width: 12.5%;
       padding: 4px;
+    }
+
+    &__today {
+      outline: 3px solid red;
+      outline-offset: -4px;
     }
   }
 

@@ -1,5 +1,6 @@
 const React = require('react');
 const moment = require('moment');
+const className = require('class-name/class-name');
 const AddForm = require('add-form/add-form.jsx');
 const Room = require('room/room.jsx');
 const DirectionButton = require('controls/direction-button.jsx');
@@ -19,11 +20,6 @@ class BookEntries extends React.Component {
       currentDates.push(moment(firstDay).add(i, 'd').valueOf());
     }
     return currentDates;
-  }
-
-  static getDayClasses(day) {
-    const today = moment().startOf('day').valueOf();
-    return day === today ? 'rooms__cell rooms__today' : 'rooms__cell';
   }
 
   static getMaxCapacity(rooms) {
@@ -161,6 +157,7 @@ class BookEntries extends React.Component {
   render() {
     const { isAdding, maxCapacity, days, rooms } = this.state;
     const { changeLoadingStatus } = this.props;
+    const today = moment().startOf('day').valueOf();
     return (
       <div>
         <ReactCSSTransitionGroup
@@ -201,8 +198,10 @@ class BookEntries extends React.Component {
             <div className="rooms__cell" />
             {
               days.map((day, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <div className={BookEntries.getDayClasses(day)} key={index}>
+                <div
+                  className={className({ name: 'rooms__cell', mods: { today: day === today } })}
+                  key={index}
+                >
                   <div className="rooms__week-day">
                     {moment(day).format('dddd').toUpperCase()}
                   </div>
